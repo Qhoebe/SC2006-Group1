@@ -1,0 +1,12 @@
+COLLECTION NAME: "UserInformation"
+
+{
+    username: _username, //String  *
+    password: _password, //String  *
+    carMakeID: _carMakeID, //String *
+    carModelID: _carModelID, //String *
+    carName: _carName, //String 
+    carFuelConsumption: _fuelConsumption //float 
+}
+
+* is the field required to sign up
