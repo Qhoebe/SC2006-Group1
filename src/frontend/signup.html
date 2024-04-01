@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class = "container">
+    <h1>Sign Up</h1>
+    <form action="signup.php" method="POST">
+        <div class = "input-name">
+            <label for="name">Name:</label>
+            <input type = "text" placeholder="Name" required minlength="2" maxlength="30" pattern = "[a-zA-Z0-9]+" name = "name">
+        </div>
+        <div class = "input-password" style="margin-right: 27px;">
+            <label for="name">Password:</label>
+            <input type = "password" placeholder="Password" required minlength="2" maxlength="30" name = "password">
+        </div>
+        <section class="submission">
+            <input type="submit" value="Submit" style="margin-left: 50px;">
+            <a href = "login.html" style = "margin-left: 70px;">Login</a>
+          </section>
+    </form>
+    </div>
+</body>
+
+</html>
