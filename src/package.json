@@ -2,9 +2,9 @@
   "name": "nodejsapp",
   "version": "1.0.0",
   "description": "",
-  "main": "sever.js",
+  "main": "sever.mjs",
   "scripts": {
-    "devStart": "nodemon server.js"
+    "devStart": "nodemon server.mjs"
   },
   "author": "belvedere",
   "license": "ISC",

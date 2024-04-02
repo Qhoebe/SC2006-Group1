@@ -45,6 +45,12 @@ export async function login(_username, _password) {
   }
 }
 
+/** Get the fuel consumption and name of the car model from carController
+ *
+ * @param {*} _carMakeID the ID of the car make
+ * @param {*} _carModelID the id of the model of the car
+ * @returns [carName, carFuelConsumption]
+ */
 async function getNameAndFuelConsumption(_carMakeID, _carModelID) {
   try {
     const { getCarFuelConsumption, getNameOfModel } = await import(
@@ -101,6 +107,7 @@ export async function editUserInfo(document) {
     throw new Error("Error at editUserInfo:\n", e);
   }
 }
+
 /** To create a new user
  *
  * @param {*} newDocument a js object that contains all the particulars of the user required. Refer to user.txt

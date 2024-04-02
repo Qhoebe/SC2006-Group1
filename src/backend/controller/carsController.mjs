@@ -17,9 +17,6 @@ export async function getListOfModels(makeID) {
   }
 }
 
-// Function that gets the Car Fuel Consumption for a specific model
-// return the json object.
-
 /** To get the car fuel consumption of a specific model
  *
  * @param {*} makeID the ID of the make of the car
@@ -44,9 +41,6 @@ export async function getCarFuelConsumption(makeID, modelID) {
     throw new Error("Error at getCarFuelConsumption:\n", e);
   }
 }
-
-// Function that get the name of the model
-// return a the model name in String
 
 /** To get the name of the model
  *
