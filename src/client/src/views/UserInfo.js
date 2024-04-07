@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import UserOverview from '../components/userOverview';
 import ExpenseContainer from '../components/expenseContainer';
 import DistanceContainer from '../components/distanceContainer';
+import { getUserDetails } from '../apiCalls/userApi';
 import '../styles/userInfo.css';
+import SpendingGraph from '../components/spendingGraph';
 
 function UserInfoView() {
 
@@ -12,30 +14,20 @@ function UserInfoView() {
   const [fuelConsumption, setFuelConsumption] = useState('');
 
   useEffect(() => {
-    async function getUserDetails(_username) {
-      try {
-        const response = await fetch('user/', {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ username: _username }), // Convert the object to JSON string
-        });
-        const user = await response.json();
+    getUserDetails(username)
+      .then(user => {
         const { carName, carFuelConsumption } = user;
         setCarModel(carName);
         setFuelConsumption(carFuelConsumption);
-      } catch (error) {
+      })
+      .catch(error => {
         console.error('Error fetching user details:', error);
-        // Handle error, e.g., show an error message
-      }
-    }
+        setCarModel('-');
+        setFuelConsumption('-');
+      });
 
-    // get the actual username 
-    getUserDetails(username);
+  }, [username]); // Dependency array ensures that useEffect runs whenever username changes
     
-  }, []); // Empty dependency array ensures that useEffect runs only once after initial render
-
   return (
     <div className="userInfo">
       <div className="userInfo-carDetails">
@@ -43,7 +35,7 @@ function UserInfoView() {
         <div className="userInfo-carFuelConsumption">CAR FUEL CONSUMPTION: {fuelConsumption}L/100KM</div>
       </div>
       <div className="userInfo-userOverview">
-        <UserOverview />
+        <UserOverview username={username}/>
       </div>
       <div className="userInfo-expenses">
         <ExpenseContainer username={username} />
@@ -51,6 +43,9 @@ function UserInfoView() {
       <div className="userInfo-distance">
         <DistanceContainer />
       </div>
+      {/* <div>
+        <SpendingGraph />
+      </div> */}
     </div>
   );
   

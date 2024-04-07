@@ -29,7 +29,6 @@ router.put("/", async (req, res) => {
     const { username, category, startDate, endDate, descending, max } =
       req.body;
 
-    console.log(username, category, startDate, endDate, descending, max);
     // Call getExpensesList function with extracted parameters
     const expense = await getExpensesList(
       username,

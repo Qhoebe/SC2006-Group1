@@ -9,14 +9,14 @@
     display: flex;
     flex-direction: column;
     margin: 16px;
-    border: 2px solid #222426; /* Example border: 2 pixels, solid, white */
+    border: 5px solid #4b4e50; 
     position: relative;
   }
   
   .container-header {
     top: 5px;
     left: 5px;
-    color: #fff;
+    color: rgb(222, 196, 196);
     font-weight: bold; 
     font-size: 35px; 
     padding: 5px;

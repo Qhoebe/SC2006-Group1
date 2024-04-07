@@ -22,14 +22,15 @@ export async function sumDistanceForDateRange(_username, startDate, endDate) {
         $match: {
             username: _username,
             date: {
-              $gte: new Date(startDate), // Convert startDate to a Date object
-              $lte: new Date(endDate),   // Convert endDate to a Date object
+              $gte: new Date(startDate).toISOString(), // Convert startDate to a Date object
+              $lte: new Date(endDate).toISOString(),   // Convert endDate to a Date object
             },
         },
       },
       {
         $group: {
-            totalDistance: { $sum: "$distance" }, // Sum of the distance field
+            _id: null,
+            totalDistance: { $sum: "$distanceTravelled" }, // Sum of the distance field
         },
       },
     ];
@@ -55,7 +56,7 @@ export async function sumDistanceForDateRange(_username, startDate, endDate) {
  */
 export async function sumExpensesForDateRange(_username, startDate, endDate) {
     try {
-  
+      
       // set default start date to the start of the month and end date to the current date
       startDate = startDate !== undefined ? startDate : new Date(new Date().getFullYear(), new Date().getMonth(), 1);
       endDate = endDate !== undefined ? endDate : new Date();
@@ -67,8 +68,8 @@ export async function sumExpensesForDateRange(_username, startDate, endDate) {
           $match: {
               username: _username,
               date: {
-                $gte: new Date(startDate), // Convert startDate to a Date object
-                $lte: new Date(endDate),   // Convert endDate to a Date object
+                $gte: new Date(startDate).toISOString(), // Convert startDate to a Date object
+                $lte: new Date(endDate).toISOString(),   // Convert endDate to a Date object
               },
           },
         },
@@ -81,7 +82,7 @@ export async function sumExpensesForDateRange(_username, startDate, endDate) {
       ];
   
       const result = await aggregateDocuments(Expenses, pipeline)
-  
+      
       if (result.length > 0) {
         return result; // Return the total spend for each category
       } else {
@@ -101,7 +102,6 @@ export async function sumExpensesForDateRange(_username, startDate, endDate) {
  */
 export async function sumFuelPumpForDateRange(_username, startDate, endDate) {
     try {
-  
       // set default start date to the start of the month and end date to the current date
       startDate = startDate !== undefined ? startDate : new Date(new Date().getFullYear(), new Date().getMonth(), 1);
       endDate = endDate !== undefined ? endDate : new Date();
@@ -114,27 +114,30 @@ export async function sumFuelPumpForDateRange(_username, startDate, endDate) {
               username: _username,
               category: 0,  // Filter by PETROL category
               date: {
-                $gte: new Date(startDate), // Convert startDate to a Date object
-                $lte: new Date(endDate),   // Convert endDate to a Date object
+                $gte: new Date(startDate).toISOString(), // Convert startDate to a Date object
+                $lte: new Date(endDate).toISOString(),   // Convert endDate to a Date object
               },
           },
         },
         {
           $group: {
-              totalDuelPump: { $sum: "$amountOfFuelPump" }, // Sum of the amountOfFuelPump field
+              _id: null,
+              totalFuelPump: { $sum: "$amountOfFuelPump" }, // Sum of the amountOfFuelPump field
           },
         },
       ];
   
       const result = await aggregateDocuments(Expenses, pipeline)
-  
+      
       if (result.length > 0) {
-        return result[0].totalPetrolPump // Return the totalPetrolPump
+        return result[0].totalFuelPump // Return the totalPetrolPump
       } else {
         return 0; // Return 0 if no documents match the date range
       }
     } catch (e) {
+      console.error(e)
       throw new Error("Error at sumFuelPumpForDateRange:\n" + e);
+      
     }
 }
   

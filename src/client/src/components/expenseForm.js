@@ -26,21 +26,34 @@ const ExpenseForm = ({ isOpen, onClose, onSave, expense }) => {
   }, [expense]);
 
   const handleSave = () => {
-    // Check if an expense is provided and if it has an _id property to determine if it's an update
+    // Check if any of the required fields are empty
+    if (!category || !cost || !date || (category === '0' && !amountOfFuelPump)) {
+      alert('Please fill in all the required fields.');
+      return;
+    }
+  
+    // Check if any of the fields are invalid
+    if (isNaN(parseInt(cost)) || isNaN(new Date(date).getTime()) || (category === '0' && isNaN(parseInt(amountOfFuelPump)))) {
+      alert('Please enter valid values for the fields.');
+      return;
+    }
+  
+    // Proceed with saving the expense
     if (expense && '_id' in expense) {
-      onSave({ _id: expense._id, category: parseInt(category), cost: parseInt(cost), date, amountOfFuelPump: parseInt(amountOfFuelPump) });
+      onSave({ _id: expense._id, category: parseInt(category), cost: parseInt(cost), date: new Date(date), amountOfFuelPump: parseInt(amountOfFuelPump) });
     } else {
-      onSave({ category: parseInt(category), cost: parseInt(cost), date, amountOfFuelPump: parseInt(amountOfFuelPump) });
+      onSave({ category: parseInt(category), cost: parseInt(cost), date: new Date(date), amountOfFuelPump: parseInt(amountOfFuelPump) });
     }
     setCategory('');
     setCost('');
     setDate('');
     setAmountOfFuelPump('');
   };
+  
 
   const handleCostChange = (e) => {
     const value = e.target.value;
-    if (!isNaN(value) && Number(value) >= 0) {
+    if (!isNaN(value) && Number(value)>= 0) {
       setCost(value);
     }
   };

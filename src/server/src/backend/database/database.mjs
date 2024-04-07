@@ -109,14 +109,16 @@ export async function documentCount(collectionName, pipeline) {
  *  pipeline = [ {
     {$match: { attributeName: "valueToMatch"} },
     {$group: { newAttributeName: "$attributeToMatchAndItTakesItValue", newAttributeName : {$sum : "valueToBeSum"}}}
- * @returns A cursor object after aggregation
+ * @returns An array of js object after aggregation
  */
 export async function aggregateDocuments(collectionName, pipeline) {
   try {
     const cursor = await global.db
       .collection(collectionName)
       .aggregate(pipeline);
-    return cursor;
+
+    const resultArray = await cursor.toArray();
+    return resultArray;
   } catch (e) {
     throw new Error("Error at aggregateDocuments:\n", e);
   }

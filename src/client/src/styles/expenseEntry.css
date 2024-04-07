@@ -1,7 +1,7 @@
 /* ExpenseEntry.css */
 .expense-entry {
   position: relative; /* Ensure the parent container is positioned */
-  width: 325px;
+  width: 350px;
   height: 100px;
   background-color: #FFFFFF;
   margin: 8px 0;
