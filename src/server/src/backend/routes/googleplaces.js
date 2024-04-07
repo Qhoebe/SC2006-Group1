@@ -2,7 +2,7 @@
 import { Router } from "express";
 const router = Router();
 
-import haversineDistance from '../utils/haversineDistance';
+import haversineDistance from '../utils/haversineDistance.js';
 
 router.get('/', (req, res) => {
     try {

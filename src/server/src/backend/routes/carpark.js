@@ -3,7 +3,7 @@
 import { Router } from "express";
 const router = Router();
 
-import haversineDistance from '../utils/haversineDistance';
+import haversineDistance from '../utils/haversineDistance.js';
 
 router.get("/:lat/:lng/:range",(req,res)=>{
   let lat=parseFloat(req.params.lat);
