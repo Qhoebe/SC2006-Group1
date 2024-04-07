@@ -3,5 +3,7 @@
 {
     username: _username, //String 
     distanceTravelled: _distanceTravelled, //Float
+    from: _fromAddress //String
+    to: _toAddress //String
     date: _date //Date, date object in js
 }

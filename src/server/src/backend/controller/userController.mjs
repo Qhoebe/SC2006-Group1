@@ -17,7 +17,6 @@ export async function getUserDetail(_username) {
     const user = await findOneDocument(UserInformation, {
       username: _username,
     });
-
     return user;
   } catch (e) {
     throw new Error("Error at getUserDetail:\n", e);

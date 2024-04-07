@@ -25,7 +25,7 @@ export async function addExpenses(newDocument) {
  * @param {*} endDate to filter expenses before this date (inclusive)
  * @param {*} descending -1 to view from latest to oldest, 1 to view from oldest to latest
  * @param {*} max max number of documents to view
- * @returns a cursor object
+ * @returns a array of JSON object
  */
 export async function getExpensesList(
   _username,
@@ -43,8 +43,6 @@ export async function getExpensesList(
     endDate = endDate !== undefined ? endDate : new Date();
     descending = descending !== undefined ? descending : -1;
     max = max !== undefined ? max : Number.MAX_SAFE_INTEGER;
-
-    console.log(_username, _category, startDate, endDate, descending, max);
 
     let pipeline;
     if (_category === 3)
@@ -75,6 +73,7 @@ export async function getExpensesList(
     );
 
     return documentArray;
+
   } catch (e) {
     console.error("Error at getExpensesList:\n", e.message);
     throw new Error("Error at getExpensesList:\n", e);

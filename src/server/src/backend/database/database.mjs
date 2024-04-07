@@ -30,7 +30,6 @@ export async function closeDB() {
  */
 export async function createOneDocument(collectionName, newDocument) {
   try {
-    //console.log(global.db);
     const result = await global.db
       .collection(collectionName)
       .insertOne(newDocument);
@@ -48,7 +47,7 @@ export async function createOneDocument(collectionName, newDocument) {
  * @param {*} pipeline Filter setting. pipeline = {attributeNameToBeFilter: attributeValue}\
  * @param {*} sortedpipeline sort the cursor object based on the given pipeline
  * @param max the max number of document the cursor object will return.
- * @returns A cursor object after filtering
+ * @returns A json array after filtering
  */
 export async function findDocuments(
   collectionName,
@@ -57,11 +56,6 @@ export async function findDocuments(
   max
 ) {
   try {
-    // console.log("what the db contains now");
-    // const all = await global.db.collection(collectionName).find();
-    // const documentAll = await all.toArray();
-    // console.log(documentAll);
-
     const cursor = await global.db
       .collection(collectionName)
       .find(pipeline)
@@ -69,7 +63,7 @@ export async function findDocuments(
       .limit(max);
 
     const documentArray = await cursor.toArray();
-    console.log(documentArray);
+
     return documentArray;
   } catch (e) {
     console.error("Error at findDocuments:\n", e.message);

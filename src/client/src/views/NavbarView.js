@@ -10,7 +10,7 @@ function NavbarView() {
    <Navbar>
     <NavbarItem icon={<FontAwesomeIcon icon={faMapLocationDot} color='black'/>} text="Home" link="/" />
     <NavbarItem icon={<FontAwesomeIcon icon={faCircleUser} color='black'/>} text="Login" link="/login"/>
-    <NavbarItem icon={<FontAwesomeIcon icon={faBars} color='black'/>} text="Placeholder"/>
+    <NavbarItem icon={<FontAwesomeIcon icon={faBars} color='black'/>} text="Account" link = "/UserInfo"/>
     <NavbarItem icon={<FontAwesomeIcon icon={faBars} color='black'/>} text="Placeholder"/>
     
    </Navbar>

@@ -53,7 +53,7 @@ router.post("/edit", async (req, res) => {
       "../controller/expensesController.mjs"
     );
     const expense = await editExpenses(req.body._id, req.body);
-
+    console.log('editting expenses')
     res.send(expense);
   } catch (e) {
     console.error("An error occurred:\n", e);

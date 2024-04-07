@@ -6,7 +6,7 @@ router.use(bodyParser.json());
 
 export default router;
 
-router.get("/", async (req, res) => {
+router.put("/", async (req, res) => {
   try {
     const { getUserDetail } = await import("../controller/userController.mjs");
     const userDetails = await getUserDetail(req.body.username);

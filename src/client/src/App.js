@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import NavbarView from './views/NavbarView'
 import Login from './views/LoginView'
 import Signup from './views/SignupView' 
+import UserInfo from './views/UserInfo'
+
 import Map from './Map'
 function App() {
   return (
@@ -18,7 +20,7 @@ function App() {
       <Route exact path="/" element={<Map/>}/>
       <Route exact path="/login" element={<Login/>}/>
       <Route exact path="/signup" element={<Signup/>}/>
-     
+      <Route exact path="/UserInfo" element={<UserInfo/>}/>
 
     </Routes>
 
