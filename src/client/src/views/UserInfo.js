@@ -4,7 +4,7 @@ import ExpenseContainer from '../components/expenseContainer';
 import DistanceContainer from '../components/distanceContainer';
 import { getUserDetails } from '../apiCalls/userApi';
 import '../styles/userInfo.css';
-import SpendingGraph from '../components/spendingGraph';
+// import SpendingGraph from '../components/spendingGraph';
 
 function UserInfoView() {
 
@@ -30,18 +30,22 @@ function UserInfoView() {
     
   return (
     <div className="userInfo">
-      <div className="userInfo-carDetails">
+      <div className='userInfo-carDetails '>
         <h1 className="userInfo-carName">{carModel}</h1>
         <div className="userInfo-carFuelConsumption">CAR FUEL CONSUMPTION: {fuelConsumption}L/100KM</div>
       </div>
-      <div className="userInfo-userOverview">
-        <UserOverview username={username}/>
+      <div className='userInfo-overview'>
+        <div className="userInfo-userOverview">
+          <UserOverview username={username}/>
+        </div>
       </div>
-      <div className="userInfo-expenses">
-        <ExpenseContainer username={username} />
-      </div>
-      <div className="userInfo-distance">
-        <DistanceContainer />
+      <div className='userInfo-details'>
+        <div className="userInfo-expenses">
+          <ExpenseContainer username={username} />
+        </div>
+        <div className="userInfo-distance">
+          <DistanceContainer />
+        </div>
       </div>
       {/* <div>
         <SpendingGraph />
