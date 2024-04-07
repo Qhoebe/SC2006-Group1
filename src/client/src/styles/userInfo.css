@@ -1,0 +1,46 @@
+.userInfo {
+    width: 1440px;
+    height: 950px;
+    margin: 0 auto;
+    background-color: #191919
+  }
+
+/* .userInfo-picture{} */
+
+.userInfo-carName{
+    position: relative;
+    font-size: 50px; /* Adjust the font size */
+    font-weight: bold;
+    left: 20px;
+    color: #ffffff
+}
+.userInfo-carFuelConsumption{
+    position: relative;
+    font-size: 30px; /* Adjust the font size */
+    font-weight: bold;
+    top: -55px;
+    left: 850px;
+    color: #ffffff
+}
+
+.userInfo-userOverview{
+    position: relative;
+    top: -65px
+}
+
+.userInfo-distance{
+    position: relative;
+    top: -696px; 
+    left: 430px; 
+}
+
+.userInfo-expenses{
+    position: relative;
+    top: -60px
+}
+
+.userInfo-carDetails {
+    padding-bottom: 10px; /* Adjust the value as needed */
+  }
+
+/* .userInfo-insights{} */

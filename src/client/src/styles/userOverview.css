@@ -1,0 +1,46 @@
+/* userOverview.css */
+.rounded-rectangle {
+  width: 811px;
+  height: 227px;
+  background-color: #1d1f21;
+  border-radius: 10px;
+  color: #fff;
+  display: flex;
+  margin: 16px;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  border: 2px solid #222426; /* Example border: 2 pixels, solid, white */
+  padding: 10px; /* Adjust padding as per design */
+}
+
+.date-style {
+  position: absolute;
+  font-size: 22px; /* Adjust the font size */
+  font-weight: bold;
+  top: 13px;
+  right: 20px;
+  color: #fff;
+}
+
+/* Define styles for the table */
+table {
+  width: 100%; /* Ensure the table takes up the full width of its container */
+  margin: 50px auto 0; /* Add top margin, keep it centered horizontally */
+}
+
+
+/* Define styles for table headers */
+th {
+    font-weight: normal; /* Make the headers bold */
+    font-size: 24px; /* Adjust the font size */
+    padding: 10px; /* Add padding */
+  }
+  
+  /* Define styles for table cells */
+  td {
+    font-weight: bold; /* Make the headers bold */
+    font-size: 55px; /* Adjust the font size for cells */
+    padding: 10px; /* Add padding */
+    text-align: center; /* Center-align the content */
+  }

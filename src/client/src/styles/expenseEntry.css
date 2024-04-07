@@ -1,0 +1,61 @@
+/* ExpenseEntry.css */
+.expense-entry {
+  position: relative; /* Ensure the parent container is positioned */
+  width: 325px;
+  height: 100px;
+  background-color: #FFFFFF;
+  margin: 8px 0;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between; /* Align content horizontally */
+  align-items: center; /* Center content vertically */
+  position: relative;
+}
+
+.expense-content {
+  flex-grow: 1; /* Grow to fill available space */
+  position: relative; /* Ensure child elements are positioned relative to the container */
+}
+.expense-date {
+  position: absolute;
+  font-size: 18px; /* Adjust the font size */
+  top: -45px;
+  right: 10px;
+}
+
+.expense-category{
+  position: absolute;
+  font-weight: bold;
+  font-size: 22px;
+  top: -45px;
+  left: 10px;
+}
+.expense-cost{
+  position: absolute;
+  font-size: 18px; 
+  top: -10px;
+  left: 10px;
+}
+
+.expense-fuel {
+  position: absolute;
+  font-size: 18px; /* Adjust the font size */
+  top: 15px;
+  left: 10px;
+}
+
+.expense-actions {
+  position: absolute;
+  right: 16px;
+}
+
+.delete-btn, .edit-btn {
+  cursor: pointer;
+  margin-left: 5px;
+  margin-bottom: 5px; /* Adjust the amount of padding */
+}
+
+
+  

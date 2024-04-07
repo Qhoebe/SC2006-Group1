@@ -1,0 +1,41 @@
+.distance-entry {
+    width: 325px;
+    height: 100px;
+    background-color: #FFFFFF;
+    margin: 8px 0;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .distance-date {
+    position: absolute;
+    font-size: 18px; /* Adjust the font size */
+    top: 5px;
+    right: 20px;
+  }
+
+  .distance-distance{
+    position: absolute;
+    font-weight: bold;
+    font-size: 22px;
+    top: 5px;
+    left: 20px;
+  }
+
+  .distance-fromAddress{
+    position: absolute;
+    font-size: 18px; 
+    top: 35px;
+    left: 20px;
+  }
+
+  .distance-toAddress{
+    position: absolute;
+    font-size: 18px; /* Adjust the font size */
+    top: 60px;
+    left: 20px; 
+  }
