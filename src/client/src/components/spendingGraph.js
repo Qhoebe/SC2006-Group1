@@ -1,45 +1,83 @@
-// import React, { useState } from 'react';
-// import {XYPlot, LineSeries, XAxis, YAxis, VerticalGridLines, HorizontalGridLines} from 'react-vis';
-// import '../node_modules/react-vis/dist/style.css'; // Import the styles
+/* App.js */
+import React, { Component } from 'react';
+import CanvasJSReact from '@canvasjs/react-charts';
+import {handleFetchDataForGraph} from '../apiCalls/insightApi'
+import '../styles/spendingGraph.css';
+//var CanvasJSReact = require('@canvasjs/react-charts');
+ 
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+ 
+class SpendingGraph extends Component {	
 
-// const SpendingGraph = () => {
-//   const [duration, setDuration] = useState('1 year'); // Default to 1 year
-//   const [linesToShow, setLinesToShow] = useState(['distance', 'fuel', 'total']); // Default to show all lines
+	state = {
+        data: [] // Initial state for your data
+    };
 
-//   // Dummy data
-//   const data = {
-//     distance: [{x: 1, y: 10}, {x: 2, y: 15}, {x: 3, y: 9}],
-//     fuel: [{x: 1, y: 5}, {x: 2, y: 11}, {x: 3, y: 6}],
-//     total: [{x: 1, y: 20}, {x: 2, y: 29}, {x: 3, y: 18}],
-//   };
+	componentDidMount() {
+		const fetchData = async () => {
+		  try {
+			const result = await handleFetchDataForGraph(this.props.username);
+			this.setState({ data: result }); // Assuming 'result' is the data you want to set
+		  } catch (e) {
+			console.log("An error occurred while fetching data for the graph:", e);
+		  }
+		};
+	  
+		fetchData();
+	}
+	
+	render() {
+		const options = {
+				animationEnabled: true,	
+				title:{
+					text: "Expenses For The Past Year",
+                    fontColor: "#FFFFFF",
+                    fontFamily: "Arial", // Optional: You can also set the font family
+                    fontSize: 20, // Optional: You can also set the font size
+                    
+				},
+                backgroundColor: "#191919",
+				axisY : {
+					title: "Spent",
+                    titleFontColor: "#FFFFFF",
+                    titleFontSize: 30, 
+                    titleFamily: "Arial",
+                    lineColor: "#FFFFFF", // Set Y axis line color to white
+                    labelFontColor: "#FFFFFF", // Set Y axis labels color to white
+                    tickColor: "#FFFFFF", // Set Y axis tick marks color to white
+					labelFontSize: 20,
+					scaleBreaks: {
+						autoCalculate: true,
+						type: "wavy",
+						lineColor: "white"
+					}
+				},
+                axisX: {
+                    lineColor: "#FFFFFF", // Set X axis line color to white
+                    labelFontColor: "#FFFFFF", // Set X axis labels color to white
+                    tickColor: "#FFFFFF", // Set X axis tick marks color to white
+					labelFontSize: 20,
+                },
+				toolTip: {
+					shared: true
+				},
+				legend: {
+					fontColor: "#FFFFFF", // Set legend text color to white
+					fontSize: 20, // Optional: you can also set the font size for the legend
+					fontFamily: "Arial" // Optional: you can also set the font family for the legend
+				  },
+				data: this.state.data
+		}
 
-//   // Handling duration change (example function, adapt as needed)
-//   const handleDurationChange = (newDuration) => {
-//     setDuration(newDuration);
-//     // Update data based on newDuration...
-//   };
-
-//   // Handling line visibility toggle (example function, adapt as needed)
-//   const toggleLine = (line) => {
-//     setLinesToShow((prevLines) => prevLines.includes(line) ? prevLines.filter(l => l !== line) : [...prevLines, line]);
-//   };
-
-//   return (
-//     <div style={{ padding: '20px', borderRadius: '15px', border: '1px solid #ccc', marginBottom: '20px' }}>
-//       <h2 style={{ textAlign: 'center' }}>Past Year Spending</h2>
-//       <XYPlot height={300} width={600}>
-//         <VerticalGridLines />
-//         <HorizontalGridLines />
-//         <XAxis title="Month" />
-//         <YAxis title="Value" />
-//         {linesToShow.includes('distance') && <LineSeries data={data.distance} color="blue" />}
-//         {linesToShow.includes('fuel') && <LineSeries data={data.fuel} color="red" />}
-//         {linesToShow.includes('total') && <LineSeries data={data.total} color="green" />}
-//       </XYPlot>
-//       {/* Duration and line toggle controls */}
-//       {/* Implement UI elements to change duration and toggle lines */}
-//     </div>
-//   );
-// };
-
-// export default SpendingGraph;
+		
+		return (
+		<div className='graph'>
+			<div className='graph-container'>
+				<CanvasJSChart options = {options} />
+			</div>
+		</div>
+		);
+	}
+}
+ 
+export default SpendingGraph;   

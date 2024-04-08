@@ -1,27 +1,31 @@
 /* userOverview.css */
 .rounded-rectangle {
-  width: 1350px;
-  height: 205px;
+  display: flex; /* Establish flex container */
+  flex-direction: column; /* Stack children vertically */
+  align-items: left; /* Center children horizontally */
+  width: 100%;  
+  min-width: 1350px;
+  height: 230px;
   background-color: #1d1f21;
   border-radius: 10px;
   color: #fff;
-  display: flex;
-  margin: 16px;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
   border: 5px solid #4b4e50; 
   padding: 10px; 
   left: 380px;
+  flex-shrink: 0;
 }
 
+.overview-row1{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
 .date-style {
-  position: absolute;
   font-size: 22px; 
   font-weight: bold;
-  top: 13px;
-  right: 20px;
   color: #fff;
+  flex-shrink: 0;
 }
 
 .date-style input {
@@ -34,43 +38,49 @@
   font-weight: bold;
   color: #ffffff; 
   width: 170px; 
+  flex-shrink: 0;
+  
 }
 
 .overview-header{
-    position: absolute;
-    top: 5px;
-    left: 15px;
     color: rgb(222, 196, 196);
     font-weight: bold; 
     font-size: 35px; 
 }
 
 .error-message {
-  position: absolute;
+  display: flex;
+  height: 0px;
+  flex-direction: row;
+  justify-content: right;
+  align-items: baseline;
   color: red;
   font-size: 18px;
-  top: 50px;
-  right: 20px;
+}
+
+.overview-filler{
+  flex-grow: 1;
+  flex-shrink: 5;
+  color: #1d1f21;
 }
 
 /* Define styles for the table */
 table {
   width: 100%; 
-  margin: 50px auto 0; 
+  margin: 20px auto 0; 
 }
 
 
 /* Define styles for table headers */
 th {
     color: #a8a4a4;
-    font-size: 20px; 
+    font-size: 23px; 
     text-decoration: underline;
-    padding-top: 10px
   }
   
   /* Define styles for table cells */
   td {
     font-weight: bold; 
-    font-size: 65px; 
+    font-size: 3rem; 
     text-align: center; 
   }

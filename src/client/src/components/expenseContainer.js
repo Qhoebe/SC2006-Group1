@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import ExpenseList from './expenseList'; 
 import ExpenseForm from './expenseForm';
 import {handleDeleteExpense, handleUpdateExpense, handleAddNewExpense, handleFetchExpenses} from '../apiCalls/expensesApi.js'
-import '../styles/container.css'; 
+import '../styles/container.css';
+import { useUpdate  } from '../context/UpdateContext.js'; 
 
 const ExpenseContainer = ({ username }) => {
 
@@ -10,6 +11,7 @@ const ExpenseContainer = ({ username }) => {
   const [expenses, setExpenses] = useState([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editExpense, setEditExpense] = useState({}); // State to store expense being edited
+  const { triggerUpdate } = useUpdate();
 
 
   const handleDelete = useCallback(async (expenseToDelete) => {
@@ -20,6 +22,7 @@ const ExpenseContainer = ({ username }) => {
       if (success) {
         // If deletion is successful, update the expenses state
         setExpenses(prevExpenses => prevExpenses.filter(expense => expense._id !== expenseToDelete._id));
+        triggerUpdate(); // This notifies other components of the update
       } else {
         // If deletion fails, log an error or handle it accordingly
         console.error('Failed to delete expense');
@@ -42,6 +45,7 @@ const ExpenseContainer = ({ username }) => {
         await handleAddNewExpense(expenseData);
       }
 
+      triggerUpdate(); // This notifies other components of the update
       setIsFormOpen(false);
       setEditExpense({});
 

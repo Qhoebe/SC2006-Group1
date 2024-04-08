@@ -1,63 +1,57 @@
-.userInfo {
-    display: flex; /* Establish flex container */
-    flex-direction: column; /* Stack children vertically */
-    align-items: center; /* Center children horizontally */
-    background-color: #191919;
-    margin: 0 auto;
-    padding: 1rem;
-  }
-  
-  .userInfo-carName {
-    font-size: 3.125rem; /* 50px / 16px base font size */
-    font-weight: bold;
-    color: #ffffff;
-  }
-  
-  .userInfo-carFuelConsumption {
-    font-size: 1.875rem; /* 30px / 16px base font size */
-    font-weight: bold;
-    color: #ffffff;
-    justify-content: right;
-    align-self: flex-end; 
-    margin-left: 12rem;
-  }
-  
-  /* Create a flex container for overview and details */
-  .userInfo-overview {
-    display: flex;
-    flex-direction: row; /* Arrange children horizontally */
-    width: 100%; /* Take full width of the parent */
-    justify-content: left; /* Space out children evenly */
-    align-items: flex-start; /* Align children to the start of the cross axis */
-  }
-  
-  .userInfo-userOverview{
-    display: flex;
-    flex-direction: row; /* Stack children vertically */
-    align-items: center; /* Center children horizontally */
-  }
+.userContainer {
+  height: 100vh;
+  display: flex; /* Establish flex container */
+  flex-direction: column; /* Stack children vertically */
+  align-items: left; /* Center children horizontally */
+  background-color: #191919;
+  margin: 0 auto;
+  padding-right: 3rem;
+}
 
-  .userInfo-details{
-    display: flex;
-    flex-direction: row; /* Arrange children horizontally */
-    width: 100%; /* Take full width of the parent */
-    justify-content: space-evenly; /* Space out children evenly */
-    align-items: baseline; /* Align children to the start of the cross axis */
-  }
-  .userInfo-distance,
-  .userInfo-expenses {
-    display: flex;
-    flex-direction: column; /* Stack children vertically */
-    align-items: normal; /* Center children horizontally */
-  }
-  
-  /* .userInfo-insights{} */
-  
-  .userInfo-carDetails {
-    display: flex;
-    flex-direction: row; /* Arrange children horizontally */
-    width: 100%; /* Take full width of the parent */
-    justify-content: space-evenly; /* Space out children evenly */
-    align-items: flex-start; /* Align children to the start of the cross axis */
-  }
-  
+.userContainer-row1{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 10%;
+  padding-left: 10%;
+}
+
+.userInfo-carName{
+  font-size: 8rem; /* 50px / 16px base font size */
+  font-weight: bold;
+  color: #ffffff;
+  align-self:flex-end;
+}
+
+.userInfo-carFuelConsumption {
+  font-size: 2rem; /* 30px / 16px base font size */
+  font-weight: bold;
+  color: #ffffff;
+  justify-content: right;
+  align-self: flex-end;
+  flex-shrink: 0;
+}
+
+.userContainer-overview {
+  display: flex;
+  flex-direction: row; /* Arrange children horizontally */
+  width: 100%; /* Take full width of the parent */
+  justify-content: center; /* Space out children evenly */
+  align-items: flex-end; /* Align children to the start of the cross axis */
+  padding-right: 10%;
+  padding-left: 10%;
+}
+
+.userContainer-details {
+  display: flex;
+  flex-direction: row; /* Arrange children horizontally */
+  width: 100%; /* Take full width of the parent */
+  justify-content: left; /* Space out children evenly */
+  align-items: flex-start; /* Align children to the start of the cross axis */
+  padding-right: 9.5%;
+  padding-left: 9.5%;
+}
+
+.userContainer-graph{
+  flex : 1;
+}

@@ -2,30 +2,25 @@
 .container {
     position: relative;
     width: 380px;
-    height: 620px;
+    height: 800px;
+    min-height: 630px;
     background-color: #1d1f21; /* Adjust background color as per design */
     border-radius: 10px; /* Adjust border radius as per design */
     padding: 10px; /* Adjust padding as per design */
     display: flex;
     flex-direction: column;
     margin: 16px;
-    border: 5px solid #4b4e50; 
-    position: relative;
+    border: 5px solid #4b4e50;
   }
   
   .container-header {
-    top: 5px;
-    left: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     color: rgb(222, 196, 196);
     font-weight: bold; 
-    font-size: 35px; 
+    font-size: 35px;  
     padding: 5px;
-  }
-
-  .container-button{
-    position: relative;
-    top: 5px;
-    right: -120px;
   }
 
   .form-backdrop {

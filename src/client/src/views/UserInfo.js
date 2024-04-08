@@ -4,7 +4,9 @@ import ExpenseContainer from '../components/expenseContainer';
 import DistanceContainer from '../components/distanceContainer';
 import { getUserDetails } from '../apiCalls/userApi';
 import '../styles/userInfo.css';
-// import SpendingGraph from '../components/spendingGraph';
+import SpendingGraph from '../components/spendingGraph';
+import { UpdateProvider } from '../context/UpdateContext';
+
 
 function UserInfoView() {
 
@@ -29,27 +31,22 @@ function UserInfoView() {
   }, [username]); // Dependency array ensures that useEffect runs whenever username changes
     
   return (
-    <div className="userInfo">
-      <div className='userInfo-carDetails '>
+    <div className="userContainer">
+      <div className='userContainer-row1'>
         <h1 className="userInfo-carName">{carModel}</h1>
         <div className="userInfo-carFuelConsumption">CAR FUEL CONSUMPTION: {fuelConsumption}L/100KM</div>
       </div>
-      <div className='userInfo-overview'>
-        <div className="userInfo-userOverview">
+      <UpdateProvider> {/* Wrap components that need access to expenses context */}
+        <div className='userContainer-overview'>
           <UserOverview username={username}/>
         </div>
-      </div>
-      <div className='userInfo-details'>
-        <div className="userInfo-expenses">
+        <div className='userContainer-details'>
           <ExpenseContainer username={username} />
-        </div>
-        <div className="userInfo-distance">
           <DistanceContainer />
+          <SpendingGraph username = {username} />
         </div>
-      </div>
-      {/* <div>
-        <SpendingGraph />
-      </div> */}
+      </UpdateProvider>
+
     </div>
   );
   

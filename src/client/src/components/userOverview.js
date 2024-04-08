@@ -1,6 +1,8 @@
 import {React,useState, useEffect} from 'react';
 import {handleFetchInsights} from '../apiCalls/insightApi'
 import '../styles/userOverview.css';
+import { useUpdate  } from '../context/UpdateContext';
+
 
 const UserOverview = ({ username }) => {
   
@@ -10,8 +12,12 @@ const UserOverview = ({ username }) => {
   const [fuelSpent, setFuelSpent] = useState('-');
   const [fuelPump, setFuelPump] = useState('-'); 
   const [startDate, setStartDate] = useState(new Date(new Date().getFullYear(), new Date().getMonth(), 1,8,0,0)); // Default start date is the beginning of the current month
-  const [endDate, setEndDate] = useState(new Date()); // Default end date is today
+  const [endDate, setEndDate] = useState(()=>{
+    const ukDate = new Date(); 
+    return new Date(ukDate.setHours(ukDate.getHours()+8)) // Change to Singapore time zone and date
+  });
   const [errorMessage, setErrorMessage] = useState('');
+  const { updateFlag } = useUpdate();
 
   useEffect(() => {
     const fetchInsights = async () => {
@@ -30,7 +36,7 @@ const UserOverview = ({ username }) => {
 
     fetchInsights();
 
-  }, [username, startDate, endDate]);
+  }, [username, startDate, endDate, updateFlag]);
 
   // Function to handle changes in the start date input
   const handleStartDateChange = (event) => {
@@ -58,30 +64,36 @@ const UserOverview = ({ username }) => {
 
   return (
     <div className="rounded-rectangle">
-      <div className="date-style">
-        <label htmlFor="startDate">from </label>
-        <input type="date" id="startDate" value={startDate.toISOString().split('T')[0]} onChange={handleStartDateChange} />
-        <label htmlFor="endDate">     to     </label>
-        <input type="date" id="endDate" value={endDate.toISOString().split('T')[0]} onChange={handleEndDateChange} />
+      <div className='overview-row1'>
+        <div className='overview-header'>OVERVIEW</div>
+        <div className="date-style">
+          <label htmlFor="startDate">from </label>
+          <input type="date" id="startDate" value={startDate.toISOString().split('T')[0]} onChange={handleStartDateChange} />
+          <label htmlFor="endDate"> to </label>
+          <input type="date" id="endDate" value={endDate.toISOString().split('T')[0]} onChange={handleEndDateChange} />
+        </div>
       </div>
-      {errorMessage && <span className="error-message">{errorMessage}</span>}
-      <div className='overview-header'>OVERVIEW</div>
+      <div className="error-message">
+        <p className='overview-filler'>.</p>
+        {errorMessage && <span>{errorMessage}</span>}
+      </div>
       <table>
         <thead>
           <tr>
-            <th>DISTANCE TRAVELLED</th>
-            <th>FUEL PUMP</th>
             <th>ACCESSORIES AMOUNT SPENT</th>
             <th>REPAIR AMOUNT SPENT</th>
+            <th>DISTANCE TRAVELLED</th>
+            <th>FUEL PUMP</th>
             <th>FUEL AMOUNT SPENT</th>
+            
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>{distance}</td>
-            <td>{fuelPump}L</td>
             <td>${accessoriesSpent}</td>
             <td>${repairSpent}</td>
+            <td>{distance}</td>
+            <td>{fuelPump}L</td>
             <td>${fuelSpent}</td>
             
           </tr>
