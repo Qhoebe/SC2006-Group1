@@ -37,6 +37,7 @@ router.post('/isFavourited', async (req, res) => {
     try {
         const { isFavorited } = await import("../controller/favouritesController.mjs");
         const success = await isFavorited(req.body);
+        console.log(req.body)
         res.status(200).json({ success: !!success });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -49,7 +50,8 @@ router.post('/findAll', async (req, res) => {
     try {
         const { favoritesList } = await import("../controller/favouritesController.mjs");
         const success = await favoritesList(req.body);
-        res.status(200).json({ success: !!success });
+
+        res.status(200).json(success);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
