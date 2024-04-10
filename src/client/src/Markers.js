@@ -41,6 +41,12 @@ function Markers(props) {
     const fetchIsFavouritedStatus = async () => {
       if (!selectedPlace) return;
       try {
+        var placeID;
+        if (FacilityType === 'CARPARK'){
+          placeID = selectedPlace.CarParkID
+        } else {
+          placeID = selectedPlace.PlaceID
+        }
         // Make a request to your backend to check if the place is favourited
         const response = await fetch(`/favourites/isFavourited`, {
           method: 'POST',
@@ -50,7 +56,7 @@ function Markers(props) {
           },
           body: JSON.stringify({
             "userID": "bob", //REPLACE!!!
-            "placeID": selectedPlace.PlaceID // Assuming your backend needs the placeID to check if it's favourited
+            "placeID": placeID // Assuming your backend needs the placeID to check if it's favourited
           })
         });
         if (response.ok) {
@@ -72,6 +78,12 @@ function Markers(props) {
     if (!selectedPlace) return;
 
     try {
+      var placeID;
+        if (FacilityType === 'CARPARK'){
+          placeID = selectedPlace.CarParkID
+        } else {
+          placeID = selectedPlace.PlaceID
+        }
       const endpoint = isFavourited ? 'delete' : 'add'; // Determine the endpoint based on the isFavourited status
       const response = await fetch(`/favourites/${endpoint}`, {
         method: 'POST',
@@ -81,7 +93,7 @@ function Markers(props) {
         },
         body: JSON.stringify({
           "userID": "bob", // REPLACE!!!!
-          "placeID": selectedPlace.PlaceID
+          "placeID": placeID
         })
       });
       if (response.ok) {
