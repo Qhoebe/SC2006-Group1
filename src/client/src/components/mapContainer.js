@@ -62,6 +62,17 @@ const MapContainer = ({username}) => {
     }
   };
 
+  const handleNumberOfDaysChange = (e) => {
+    // Use Math.floor() to ensure the value is always an integer
+    const intValue = Math.floor(parseFloat(e.target.value));
+  
+    // Check if the value is a number and greater than or equal to 1
+    if (!isNaN(intValue) && intValue >= 1) {
+      setNumberOfDays(intValue);
+    }
+    else setNumberOfDays(1)
+  }
+
   const fetchEstimatedPrice = async () => {
 
     if (!selectedStation || !selectedFuelType){
@@ -181,7 +192,7 @@ const MapContainer = ({username}) => {
           <input
             type="number"
             value={numberOfDays}
-            onChange={(e) => setNumberOfDays(e.target.value)}
+            onChange={handleNumberOfDaysChange}
             min="1"
             step="1"
           />
