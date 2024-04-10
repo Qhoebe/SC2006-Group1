@@ -42,7 +42,7 @@ function Markers(props) {
       if (!selectedPlace) return;
       try {
         // Make a request to your backend to check if the place is favourited
-        const response = await fetch(`http://localhost:5000/favourites/isFavourited`, {
+        const response = await fetch(`/favourites/isFavourited`, {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -73,7 +73,7 @@ function Markers(props) {
 
     try {
       const endpoint = isFavourited ? 'delete' : 'add'; // Determine the endpoint based on the isFavourited status
-      const response = await fetch(`http://localhost:5000/favourites/${endpoint}`, {
+      const response = await fetch(`/favourites/${endpoint}`, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
