@@ -12,10 +12,12 @@ const PORT= 5000;
 import userRoute from "./backend/routes/user.mjs";
 import expensesRoute from "./backend/routes/expenses.mjs";
 import favouritesRoute from "./backend/routes/favourites.mjs";
+import insightRoute from "./backend/routes/insights.mjs"
 
 app.use("/user", userRoute);
 app.use("/expenses", expensesRoute);
 app.use("/favourites",favouritesRoute)
+app.use('/insights', insightRoute);
 
 
 
@@ -39,4 +41,3 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-console.log(new Date());

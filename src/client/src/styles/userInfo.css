@@ -1,46 +1,57 @@
-.userInfo {
-    width: 1440px;
-    height: 950px;
-    margin: 0 auto;
-    background-color: #191919
-  }
+.userContainer {
+  height: 100vh;
+  display: flex; /* Establish flex container */
+  flex-direction: column; /* Stack children vertically */
+  align-items: left; /* Center children horizontally */
+  background-color: #191919;
+  margin: 0 auto;
+  padding-right: 3rem;
+}
 
-/* .userInfo-picture{} */
+.userContainer-row1{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 10%;
+  padding-left: 10%;
+}
 
 .userInfo-carName{
-    position: relative;
-    font-size: 50px; /* Adjust the font size */
-    font-weight: bold;
-    left: 20px;
-    color: #ffffff
-}
-.userInfo-carFuelConsumption{
-    position: relative;
-    font-size: 30px; /* Adjust the font size */
-    font-weight: bold;
-    top: -55px;
-    left: 850px;
-    color: #ffffff
+  font-size: 8rem; /* 50px / 16px base font size */
+  font-weight: bold;
+  color: #ffffff;
+  align-self:flex-end;
 }
 
-.userInfo-userOverview{
-    position: relative;
-    top: -65px
+.userInfo-carFuelConsumption {
+  font-size: 2rem; /* 30px / 16px base font size */
+  font-weight: bold;
+  color: #ffffff;
+  justify-content: right;
+  align-self: flex-end;
+  flex-shrink: 0;
 }
 
-.userInfo-distance{
-    position: relative;
-    top: -696px; 
-    left: 430px; 
+.userContainer-overview {
+  display: flex;
+  flex-direction: row; /* Arrange children horizontally */
+  width: 100%; /* Take full width of the parent */
+  justify-content: center; /* Space out children evenly */
+  align-items: flex-end; /* Align children to the start of the cross axis */
+  padding-right: 10%;
+  padding-left: 10%;
 }
 
-.userInfo-expenses{
-    position: relative;
-    top: -60px
+.userContainer-details {
+  display: flex;
+  flex-direction: row; /* Arrange children horizontally */
+  width: 100%; /* Take full width of the parent */
+  justify-content: left; /* Space out children evenly */
+  align-items: flex-start; /* Align children to the start of the cross axis */
+  padding-right: 9.5%;
+  padding-left: 9.5%;
 }
 
-.userInfo-carDetails {
-    padding-bottom: 10px; /* Adjust the value as needed */
-  }
-
-/* .userInfo-insights{} */
+.userContainer-graph{
+  flex : 1;
+}

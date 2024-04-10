@@ -7,6 +7,7 @@ const Expenses = "Expenses";
  */
 export async function addExpenses(newDocument) {
   try {
+    
     const { createOneDocument } = await import("../database/database.mjs");
     const expense = await createOneDocument(Expenses, newDocument);
 
@@ -43,6 +44,9 @@ export async function getExpensesList(
     endDate = endDate !== undefined ? endDate : new Date();
     descending = descending !== undefined ? descending : -1;
     max = max !== undefined ? max : Number.MAX_SAFE_INTEGER;
+
+    /* SET TO SINGAPORE TIME */
+    endDate.setHours(endDate.getHours() + 8);
 
     let pipeline;
     if (_category === 3)

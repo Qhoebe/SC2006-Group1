@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import UserOverview from '../components/userOverview';
 import ExpenseContainer from '../components/expenseContainer';
 import DistanceContainer from '../components/distanceContainer';
+import { getUserDetails } from '../apiCalls/userApi';
 import '../styles/userInfo.css';
+import SpendingGraph from '../components/spendingGraph';
+import { UpdateProvider } from '../context/UpdateContext';
+
 
 function UserInfoView() {
 
@@ -12,45 +16,37 @@ function UserInfoView() {
   const [fuelConsumption, setFuelConsumption] = useState('');
 
   useEffect(() => {
-    async function getUserDetails(_username) {
-      try {
-        const response = await fetch('user/', {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ username: _username }), // Convert the object to JSON string
-        });
-        const user = await response.json();
+    getUserDetails(username)
+      .then(user => {
         const { carName, carFuelConsumption } = user;
         setCarModel(carName);
         setFuelConsumption(carFuelConsumption);
-      } catch (error) {
+      })
+      .catch(error => {
         console.error('Error fetching user details:', error);
-        // Handle error, e.g., show an error message
-      }
-    }
+        setCarModel('-');
+        setFuelConsumption('-');
+      });
 
-    // get the actual username 
-    getUserDetails(username);
+  }, [username]); // Dependency array ensures that useEffect runs whenever username changes
     
-  }, []); // Empty dependency array ensures that useEffect runs only once after initial render
-
   return (
-    <div className="userInfo">
-      <div className="userInfo-carDetails">
+    <div className="userContainer">
+      <div className='userContainer-row1'>
         <h1 className="userInfo-carName">{carModel}</h1>
         <div className="userInfo-carFuelConsumption">CAR FUEL CONSUMPTION: {fuelConsumption}L/100KM</div>
       </div>
-      <div className="userInfo-userOverview">
-        <UserOverview />
-      </div>
-      <div className="userInfo-expenses">
-        <ExpenseContainer username={username} />
-      </div>
-      <div className="userInfo-distance">
-        <DistanceContainer />
-      </div>
+      <UpdateProvider> {/* Wrap components that need access to expenses context */}
+        <div className='userContainer-overview'>
+          <UserOverview username={username}/>
+        </div>
+        <div className='userContainer-details'>
+          <ExpenseContainer username={username} />
+          <DistanceContainer />
+          <SpendingGraph username = {username} />
+        </div>
+      </UpdateProvider>
+
     </div>
   );
   

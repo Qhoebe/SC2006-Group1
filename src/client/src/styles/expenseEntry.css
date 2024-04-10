@@ -1,60 +1,49 @@
 /* ExpenseEntry.css */
 .expense-entry {
   position: relative; /* Ensure the parent container is positioned */
-  width: 325px;
+  width: 350px;
   height: 100px;
   background-color: #FFFFFF;
   margin: 8px 0;
-  padding: 16px;
+  padding: 10px;
+  padding-top: 5px;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
-  justify-content: space-between; /* Align content horizontally */
-  align-items: center; /* Center content vertically */
-  position: relative;
+  flex-direction: column;
 }
 
-.expense-content {
-  flex-grow: 1; /* Grow to fill available space */
-  position: relative; /* Ensure child elements are positioned relative to the container */
+.expense-row1{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .expense-date {
-  position: absolute;
-  font-size: 18px; /* Adjust the font size */
-  top: -45px;
-  right: 10px;
+  font-size: 20px; /* Adjust the font size */
+  align-self: baseline;
 }
 
 .expense-category{
-  position: absolute;
   font-weight: bold;
-  font-size: 22px;
-  top: -45px;
-  left: 10px;
+  font-size: 24px;
 }
 .expense-cost{
-  position: absolute;
   font-size: 18px; 
-  top: -10px;
-  left: 10px;
 }
 
 .expense-fuel {
-  position: absolute;
-  font-size: 18px; /* Adjust the font size */
-  top: 15px;
-  left: 10px;
+  font-size: 18px; 
 }
 
 .expense-actions {
   position: absolute;
-  right: 16px;
+  right: 10px;
+  top: 10px;
 }
 
 .delete-btn, .edit-btn {
   cursor: pointer;
   margin-left: 5px;
-  margin-bottom: 5px; /* Adjust the amount of padding */
+  margin-top: 5px; /* Adjust the amount of padding */
 }
 
 

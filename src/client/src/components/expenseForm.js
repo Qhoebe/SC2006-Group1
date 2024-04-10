@@ -8,6 +8,8 @@ const ExpenseForm = ({ isOpen, onClose, onSave, expense }) => {
   const [cost, setCost] = useState('');
   const [date, setDate] = useState('');
   const [amountOfFuelPump, setAmountOfFuelPump] = useState('');
+  const [costError, setCostError] = useState('');
+  const [amountOfFuelPumpError, setAmountOfFuelPumpError] = useState('');
 
   // Update form fields when expense prop changes
   useEffect(() => {
@@ -26,11 +28,37 @@ const ExpenseForm = ({ isOpen, onClose, onSave, expense }) => {
   }, [expense]);
 
   const handleSave = () => {
-    // Check if an expense is provided and if it has an _id property to determine if it's an update
+    // Clear previous errors
+    setCostError('');
+    setAmountOfFuelPumpError('');
+
+    // Validation checks
+    if (parseInt(cost) > 10000000) {
+      setCostError('Cost cannot exceed 10 million.');
+      return;
+    }
+    if (category === '0' && parseInt(amountOfFuelPump) > 100000) {
+      setAmountOfFuelPumpError('Amount of Fuel Pump cannot exceed 100,000.');
+      return;
+    }
+
+    // Check if any of the fields are invalid
+    if (isNaN(parseInt(cost)) || isNaN(new Date(date).getTime()) || (category === '0' && isNaN(parseInt(amountOfFuelPump)))) {
+      alert('Please enter valid values for the fields.');
+      return;
+    }
+
+    // Check if any of the required fields are empty
+    if (!category || !cost || !date || (category === '0' && !amountOfFuelPump)) {
+      alert('Please fill in all the required fields.');
+      return;
+    }
+
+    // Proceed with saving the expense
     if (expense && '_id' in expense) {
-      onSave({ _id: expense._id, category: parseInt(category), cost: parseInt(cost), date, amountOfFuelPump: parseInt(amountOfFuelPump) });
+      onSave({ _id: expense._id, category: parseInt(category), cost: parseInt(cost), date: new Date(date), amountOfFuelPump: parseInt(amountOfFuelPump) });
     } else {
-      onSave({ category: parseInt(category), cost: parseInt(cost), date, amountOfFuelPump: parseInt(amountOfFuelPump) });
+      onSave({ category: parseInt(category), cost: parseInt(cost), date: new Date(date), amountOfFuelPump: parseInt(amountOfFuelPump) });
     }
     setCategory('');
     setCost('');
@@ -42,6 +70,11 @@ const ExpenseForm = ({ isOpen, onClose, onSave, expense }) => {
     const value = e.target.value;
     if (!isNaN(value) && Number(value) >= 0) {
       setCost(value);
+      if (Number(value) > 10000000) {
+        setCostError('Amount spend cannot exceed $10 million.');
+      } else {
+        setCostError('');
+      }
     }
   };
 
@@ -49,6 +82,11 @@ const ExpenseForm = ({ isOpen, onClose, onSave, expense }) => {
     const value = e.target.value;
     if (!isNaN(value) && Number(value) >= 0) {
       setAmountOfFuelPump(value);
+      if (Number(value) > 100000) {
+        setAmountOfFuelPumpError('Amount of Fuel Pump cannot exceed 100,000L.');
+      } else {
+        setAmountOfFuelPumpError('');
+      }
     }
   };
 
@@ -69,6 +107,7 @@ const ExpenseForm = ({ isOpen, onClose, onSave, expense }) => {
           <label>
             Amount Spent:
             <input type="number" value={cost} onChange={handleCostChange} />
+            {costError && <div className="error">{costError}</div>}
           </label>
           <label>
             Date:
@@ -78,6 +117,7 @@ const ExpenseForm = ({ isOpen, onClose, onSave, expense }) => {
             <label>
               Fuel Pump:
               <input type="number" value={amountOfFuelPump} onChange={handleAmountOfFuelChange} />
+              {amountOfFuelPumpError && <div className="error">{amountOfFuelPumpError}</div>}
             </label>
           )}
           <button onClick={handleSave}>{expense && Object.keys(expense).length > 0 ? 'Update' : 'Save'}</button>
@@ -87,6 +127,5 @@ const ExpenseForm = ({ isOpen, onClose, onSave, expense }) => {
     )
   );
 };
-
 
 export default ExpenseForm;

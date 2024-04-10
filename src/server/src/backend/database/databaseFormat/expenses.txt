@@ -24,8 +24,7 @@ Format for Category = 0;
     category: _category, // 0 - PETROL, 1 - REPAIR, 2 - ACCESSORIES 
     cost: _amount, // Float 
     date: _date,  // Date, follow the date object in js
-    amountOfFuelPump: _fuel, //Float 
-    fuelPricePerLitre = _price // Float ---> this can be obtained from user inputting the store name and the petrol type pump (i.e Shell 98) 
+    amountOfFuelPump: _fuel, //Float
 }
 
 

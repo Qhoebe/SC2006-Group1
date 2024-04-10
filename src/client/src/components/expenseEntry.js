@@ -14,22 +14,24 @@ const ExpenseEntry = ({ expense, onDelete, onEdit }) => {
     <div className="expense-entry" 
          onMouseEnter={() => setIsHovered(true)} 
          onMouseLeave={() => setIsHovered(false)}>
-      <div className="expense-content">
+      <div className="expense-row1">
         <div className="expense-category" style={{ opacity: isHovered ? 0.5 : 1 }}>
           {categories[category]}
         </div>
-        <div className="expense-cost" style={{ opacity: isHovered ? 0.5 : 1 }}>
-          Spent: ${cost}
-        </div>
         <div className="expense-date" style={{ opacity: isHovered ? 0.5 : 1 }}>
           {formattedDate}
+        </div>
+      </div>
+      <div>
+        <div className="expense-cost" style={{ opacity: isHovered ? 0.5 : 1 }}>
+          Spent: ${cost}
         </div>
         {category === 0 && (
           <div className="expense-fuel" style={{ opacity: isHovered ? 0.5 : 1 }}>
             Fuel Pumped: {amountOfFuelPump}L
           </div>
         )}
-        </div>
+      </div>
         {isHovered && (
           <div className="expense-actions">
           <img
@@ -46,9 +48,8 @@ const ExpenseEntry = ({ expense, onDelete, onEdit }) => {
             onClick={() => onEdit(expense)}
             style={{ width: '30px', height: '30px' }}
           />
-        </div>
-      
-      )}
+          </div>
+        )}
     </div>
   );
 };

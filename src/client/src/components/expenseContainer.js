@@ -1,96 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import ExpenseList from './expenseList'; 
 import ExpenseForm from './expenseForm';
-import '../styles/container.css'; 
-
-// Function to fetch expenses data from the server
-const handleFetchExpenses = async (username) => {
-  try {
-    // Make a PUT request to fetch expenses data
-    const response = await fetch('expenses/', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ username: username }), // Convert the object to JSON string
-  });
-  
-    // Parse the JSON response
-    const expensesData = await response.json();
-
-    return expensesData
-
-  } catch (error) {
-    console.error('An error occurred while fetching expenses:', error);
-  }
-};
-
-const handleUpdateExpense = async (expenseData) => {
-  try {
-    const response = await fetch('expenses/edit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(expenseData),
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to update expense');
-    }
-
-  } catch (error) {
-    console.error('An error occurred while updating expense:', error);
-  }
-};
-
-const handleAddNewExpense = async (expenseData) => {
-  try {
-    const response = await fetch('expenses/add', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(expenseData),
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to add new expense');
-    }
-
-    // Handle successful addition
-    // For example, update the state or perform any other necessary action
-  } catch (error) {
-    console.error('An error occurred while adding new expense:', error);
-  }
-};
-
-const handleDeleteExpense = async (expenseId) => {
-  try {
-    const response = await fetch('expenses/', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ _id: expenseId }), // Convert the object to JSON string
-    });
-    
-    if (response.ok) {
-      // If the request is successful (status code 200-299), return true
-      return true;
-    } else {
-      // If the request is not successful, throw an error
-      throw new Error('Failed to delete expense');
-    }
-  } catch (error) {
-    console.error('An error occurred while deleting expense:', error);
-    // If an error occurs during the request, return false
-    return false;
-  }
-};
-
-
-
+import {handleDeleteExpense, handleUpdateExpense, handleAddNewExpense, handleFetchExpenses} from '../apiCalls/expensesApi.js'
+import '../styles/container.css';
+import { useUpdate  } from '../context/UpdateContext.js'; 
 
 const ExpenseContainer = ({ username }) => {
 
@@ -98,6 +11,7 @@ const ExpenseContainer = ({ username }) => {
   const [expenses, setExpenses] = useState([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editExpense, setEditExpense] = useState({}); // State to store expense being edited
+  const { triggerUpdate } = useUpdate();
 
 
   const handleDelete = useCallback(async (expenseToDelete) => {
@@ -108,6 +22,7 @@ const ExpenseContainer = ({ username }) => {
       if (success) {
         // If deletion is successful, update the expenses state
         setExpenses(prevExpenses => prevExpenses.filter(expense => expense._id !== expenseToDelete._id));
+        triggerUpdate(); // This notifies other components of the update
       } else {
         // If deletion fails, log an error or handle it accordingly
         console.error('Failed to delete expense');
@@ -130,6 +45,7 @@ const ExpenseContainer = ({ username }) => {
         await handleAddNewExpense(expenseData);
       }
 
+      triggerUpdate(); // This notifies other components of the update
       setIsFormOpen(false);
       setEditExpense({});
 

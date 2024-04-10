@@ -3,9 +3,9 @@ import '../styles/distanceEntry.css';
 
 function formatString(string){
 
-  if (string.length <= 32) return string
+  if (string.length <= 35) return string
 
-  const str =  string.slice(0,29) + '...'
+  const str =  string.slice(0,32) + '...'
 
   return str
 }

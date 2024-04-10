@@ -1,46 +1,86 @@
 /* userOverview.css */
 .rounded-rectangle {
-  width: 811px;
-  height: 227px;
+  display: flex; /* Establish flex container */
+  flex-direction: column; /* Stack children vertically */
+  align-items: left; /* Center children horizontally */
+  width: 100%;  
+  min-width: 1350px;
+  height: 230px;
   background-color: #1d1f21;
   border-radius: 10px;
   color: #fff;
-  display: flex;
-  margin: 16px;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  border: 2px solid #222426; /* Example border: 2 pixels, solid, white */
-  padding: 10px; /* Adjust padding as per design */
+  border: 5px solid #4b4e50; 
+  padding: 10px; 
+  left: 380px;
+  flex-shrink: 0;
 }
 
+.overview-row1{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
 .date-style {
-  position: absolute;
-  font-size: 22px; /* Adjust the font size */
+  font-size: 22px; 
   font-weight: bold;
-  top: 13px;
-  right: 20px;
   color: #fff;
+  flex-shrink: 0;
+}
+
+.date-style input {
+  background-color: #1d1f21;
+  border: none; 
+  border-color: #cecdcd; 
+  border-width: 1px;
+  border-style: solid; 
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffffff; 
+  width: 170px; 
+  flex-shrink: 0;
+  
+}
+
+.overview-header{
+    color: rgb(222, 196, 196);
+    font-weight: bold; 
+    font-size: 35px; 
+}
+
+.error-message {
+  display: flex;
+  height: 0px;
+  flex-direction: row;
+  justify-content: right;
+  align-items: baseline;
+  color: red;
+  font-size: 18px;
+}
+
+.overview-filler{
+  flex-grow: 1;
+  flex-shrink: 5;
+  color: #1d1f21;
 }
 
 /* Define styles for the table */
 table {
-  width: 100%; /* Ensure the table takes up the full width of its container */
-  margin: 50px auto 0; /* Add top margin, keep it centered horizontally */
+  width: 100%; 
+  margin: 20px auto 0; 
 }
 
 
 /* Define styles for table headers */
 th {
-    font-weight: normal; /* Make the headers bold */
-    font-size: 24px; /* Adjust the font size */
-    padding: 10px; /* Add padding */
+    color: #a8a4a4;
+    font-size: 23px; 
+    text-decoration: underline;
   }
   
   /* Define styles for table cells */
   td {
-    font-weight: bold; /* Make the headers bold */
-    font-size: 55px; /* Adjust the font size for cells */
-    padding: 10px; /* Add padding */
-    text-align: center; /* Center-align the content */
+    font-weight: bold; 
+    font-size: 3rem; 
+    text-align: center; 
   }
