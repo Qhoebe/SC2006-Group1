@@ -29,9 +29,8 @@ router.put("/", async (req, res) => {
     const { username, startDate, endDate, descending, max } =
       req.body;
 
-    console.log(username, startDate, endDate, descending, max);
     // Call getExpensesList function with extracted parameters
-    const expense = await getDistanceList(
+    const distance = await getDistanceList(
       username,
       startDate,
       endDate,
@@ -39,7 +38,7 @@ router.put("/", async (req, res) => {
       max
     );
 
-    res.send(expense);
+    res.send(distance);
   } catch (e) {
     console.error("An error occurred:\n", e);
     res.status(500).send("Internal Server Error");

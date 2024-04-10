@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/expenseEntry.css';
+import '../styles/entry.css';
 
 const categories = ['PETROL', 'REPAIR', 'ACCESSORIES'];
 
@@ -11,29 +11,29 @@ const ExpenseEntry = ({ expense, onDelete, onEdit }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="expense-entry" 
+    <div className="entry" 
          onMouseEnter={() => setIsHovered(true)} 
          onMouseLeave={() => setIsHovered(false)}>
-      <div className="expense-row1">
-        <div className="expense-category" style={{ opacity: isHovered ? 0.5 : 1 }}>
+      <div className="entry-row1">
+        <div className="entry-title" style={{ opacity: isHovered ? 0.5 : 1 }}>
           {categories[category]}
         </div>
-        <div className="expense-date" style={{ opacity: isHovered ? 0.5 : 1 }}>
+        <div className="entry-date" style={{ opacity: isHovered ? 0.5 : 1 }}>
           {formattedDate}
         </div>
       </div>
       <div>
-        <div className="expense-cost" style={{ opacity: isHovered ? 0.5 : 1 }}>
+        <div className="entry-details" style={{ opacity: isHovered ? 0.5 : 1 }}>
           Spent: ${cost}
         </div>
         {category === 0 && (
-          <div className="expense-fuel" style={{ opacity: isHovered ? 0.5 : 1 }}>
+          <div className="entry-details" style={{ opacity: isHovered ? 0.5 : 1 }}>
             Fuel Pumped: {amountOfFuelPump}L
           </div>
         )}
       </div>
         {isHovered && (
-          <div className="expense-actions">
+          <div className="entry-actions">
           <img
             className="delete-btn"
             src="/icons/delete.png"

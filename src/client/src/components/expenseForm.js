@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/addExpense.css';
+import '../styles/form.css';
 
 const categories = ['PETROL', 'REPAIR', 'ACCESSORIES'];
 
@@ -56,9 +56,9 @@ const ExpenseForm = ({ isOpen, onClose, onSave, expense }) => {
 
     // Proceed with saving the expense
     if (expense && '_id' in expense) {
-      onSave({ _id: expense._id, category: parseInt(category), cost: parseInt(cost), date: new Date(date), amountOfFuelPump: parseInt(amountOfFuelPump) });
+      onSave({ _id: expense._id, category: parseInt(category), cost: parseFloat(cost), date: new Date(date), amountOfFuelPump: parseFloat(amountOfFuelPump) });
     } else {
-      onSave({ category: parseInt(category), cost: parseInt(cost), date: new Date(date), amountOfFuelPump: parseInt(amountOfFuelPump) });
+      onSave({ category: parseInt(category), cost: parseFloat(cost), date: new Date(date), amountOfFuelPump: parseFloat(amountOfFuelPump) });
     }
     setCategory('');
     setCost('');
@@ -92,7 +92,7 @@ const ExpenseForm = ({ isOpen, onClose, onSave, expense }) => {
 
   return (
     isOpen && (
-      <div className="add-expense-form">
+      <div className="form">
         <div>
           <h2>{expense && Object.keys(expense).length > 0 ? 'EDIT EXPENSE' : 'ADD EXPENSE'}</h2>
           <label>

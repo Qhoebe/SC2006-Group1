@@ -80,22 +80,20 @@ const UserOverview = ({ username }) => {
       <table>
         <thead>
           <tr>
-            <th>ACCESSORIES AMOUNT SPENT</th>
-            <th>REPAIR AMOUNT SPENT</th>
-            <th>DISTANCE TRAVELLED</th>
+            <th>ACCESSORIES SPENT</th>
+            <th>REPAIR SPENT</th>
+            <th>FUEL SPENT</th>
             <th>FUEL PUMP</th>
-            <th>FUEL AMOUNT SPENT</th>
-            
+            <th>DISTANCE TRAVELLED</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>${accessoriesSpent}</td>
             <td>${repairSpent}</td>
-            <td>{distance}</td>
-            <td>{fuelPump}L</td>
             <td>${fuelSpent}</td>
-            
+            <td>{fuelPump}L</td>
+            <td>{distance}</td>
           </tr>
         </tbody>
       </table>

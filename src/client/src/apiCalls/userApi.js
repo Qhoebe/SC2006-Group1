@@ -9,7 +9,6 @@ async function getUserDetails(_username) {
         body: JSON.stringify({ username: _username }), // Convert the object to JSON string
       });
       const user = await response.json();
-      console.log(user)
       return user
     } catch (error) {
       console.error('Error fetching user details:', error);

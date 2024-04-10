@@ -1,28 +1,41 @@
-import React from 'react';
-import '../styles/distanceEntry.css'; 
+import React, { useState } from 'react';
+import '../styles/entry.css'; 
 
-function formatString(string){
 
-  if (string.length <= 35) return string
-
-  const str =  string.slice(0,32) + '...'
-
-  return str
-}
-
-const DistanceEntry = ({ distanceRecord }) => {
+const DistanceEntry = ({ distanceRecord, onDelete, onEdit}) => {
   let { distanceTravelled, from, to, date } = distanceRecord;
   const formattedDate = new Date(date).toLocaleDateString();
 
-  from = formatString(from)
-  to = formatString(to)
+  // State to track hover state
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="distance-entry">
-      <div className="distance-distance">{distanceTravelled}KM</div>
-      <div className="distance-fromAddress">From: {from}</div>
-      <div className="distance-toAddress">To: {to}</div>
-      <div className="distance-date">{formattedDate}</div>
+    <div className="entry"
+        onMouseEnter={() => setIsHovered(true)} 
+        onMouseLeave={() => setIsHovered(false)}>
+      <div className = "entry-row1" >
+        <div className="entry-title" style={{ opacity: isHovered ? 0.5 : 1 }}>
+          {distanceTravelled}KM
+        </div>
+        <div className="entry-date" style={{ opacity: isHovered ? 0.5 : 1 }}>
+          {formattedDate}
+        </div>
+      </div>
+      <div>
+        <div className="entry-details" style={{ opacity: isHovered ? 0.5 : 1 }}>From: {from}</div>
+        <div className="entry-details" style={{ opacity: isHovered ? 0.5 : 1 }}>To: {to}</div>
+      </div>
+      {isHovered && (
+          <div className="entry-actions">
+          <img
+            className="delete-btn"
+            src="/icons/delete.png"
+            alt="Delete"
+            onClick={() => onDelete(distanceRecord)}
+            style={{ width: '30px', height: '30px' }}
+          />
+          </div>
+        )}
     </div>
   );
 };

@@ -1,19 +1,19 @@
 .userContainer {
-  height: 100vh;
+  height: auto;
   display: flex; /* Establish flex container */
   flex-direction: column; /* Stack children vertically */
   align-items: left; /* Center children horizontally */
   background-color: #191919;
   margin: 0 auto;
-  padding-right: 3rem;
+  padding-right: 7%;
+  padding-left: 7%;
 }
 
 .userContainer-row1{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding-right: 10%;
-  padding-left: 10%;
+  min-width: 1230px;
 }
 
 .userInfo-carName{
@@ -38,20 +38,21 @@
   width: 100%; /* Take full width of the parent */
   justify-content: center; /* Space out children evenly */
   align-items: flex-end; /* Align children to the start of the cross axis */
-  padding-right: 10%;
-  padding-left: 10%;
 }
 
 .userContainer-details {
   display: flex;
   flex-direction: row; /* Arrange children horizontally */
   width: 100%; /* Take full width of the parent */
-  justify-content: left; /* Space out children evenly */
-  align-items: flex-start; /* Align children to the start of the cross axis */
-  padding-right: 9.5%;
-  padding-left: 9.5%;
+  min-width: 1300px;
+  justify-content: left;
+  align-items: center;
 }
 
-.userContainer-graph{
+.userContainer-mapInsight{
   flex : 1;
+  width: 100%;
+  min-width: 1300px;
+  display: flex;
+  justify-content: center;
 }

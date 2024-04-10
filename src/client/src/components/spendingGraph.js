@@ -36,7 +36,7 @@ class SpendingGraph extends Component {
                     fontSize: 20, // Optional: You can also set the font size
                     
 				},
-                backgroundColor: "#191919",
+                backgroundColor: "#1d1f21",
 				axisY : {
 					title: "Spent",
                     titleFontColor: "#FFFFFF",

@@ -215,16 +215,19 @@ export async function getExpenseForPastYear(_username) {
   const totalArray = results.map(result => result.total);
   const expensesArray = results.flatMap(result => result.expensesForMonth);
 
+  const total = totalArray.reverse(); 
+  const expense = expensesArray.reverse()
+  
   const data = [{
     type: "spline",
     name: "Total Expenses",
     showInLegend: true,
-    dataPoints: totalArray
+    dataPoints: total
   }, {
     type: "spline",
     name: "Petrol Expenses",
     showInLegend: true,
-    dataPoints: expensesArray
+    dataPoints: expense
   }];
   
   return data;

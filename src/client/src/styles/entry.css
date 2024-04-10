@@ -1,40 +1,40 @@
 /* ExpenseEntry.css */
-.expense-entry {
+.entry {
   position: relative; /* Ensure the parent container is positioned */
-  width: 350px;
+  width: 100%;
   height: 100px;
   background-color: #FFFFFF;
   margin: 8px 0;
   padding: 10px;
-  padding-top: 5px;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
 }
 
-.expense-row1{
+.entry-row1{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.expense-date {
-  font-size: 20px; /* Adjust the font size */
-  align-self: baseline;
+
+.entry-date {
+  font-size: 1.3rem; /* Adjust the font size */
+  align-self: right;
 }
 
-.expense-category{
+.entry-title{
   font-weight: bold;
-  font-size: 24px;
-}
-.expense-cost{
-  font-size: 18px; 
+  font-size: 1.4rem;
 }
 
-.expense-fuel {
-  font-size: 18px; 
+.entry-details{
+  font-size: 1.1rem; 
+  white-space: nowrap;
 }
 
-.expense-actions {
+.entry-actions {
   position: absolute;
   right: 10px;
   top: 10px;

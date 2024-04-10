@@ -4,7 +4,7 @@
   flex-direction: column; /* Stack children vertically */
   align-items: left; /* Center children horizontally */
   width: 100%;  
-  min-width: 1350px;
+  min-width: 1300px;
   height: 230px;
   background-color: #1d1f21;
   border-radius: 10px;
@@ -12,7 +12,6 @@
   border: 5px solid #4b4e50; 
   padding: 10px; 
   left: 380px;
-  flex-shrink: 0;
 }
 
 .overview-row1{
@@ -43,7 +42,7 @@
 }
 
 .overview-header{
-    color: rgb(222, 196, 196);
+    color: rgb(196, 189, 189);
     font-weight: bold; 
     font-size: 35px; 
 }

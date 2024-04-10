@@ -41,7 +41,8 @@ export async function getDistanceList(
     descending = descending !== undefined ? descending : -1;
     max = max !== undefined ? max : Number.MAX_SAFE_INTEGER;
 
-    console.log(_username, startDate, endDate, descending, max);
+    /* SET TO SINGAPORE TIME */
+    endDate.setHours(endDate.getHours() + 8);
 
     let pipeline = {
     username: _username,

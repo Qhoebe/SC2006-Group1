@@ -1,4 +1,4 @@
-.add-expense-form {
+.form {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -11,20 +11,20 @@
     height: auto;
   }
   
-  .add-expense-form h2 {
+  .form h2 {
     margin-top: 0;
     font-size: 20px;
     font-weight: bold;
   }
   
-  .add-expense-form label {
+  .form label {
     display: block;
     display: block;
     margin-bottom: 10px;
   }
   
-  .add-expense-form input,
-  .add-expense-form select {
+  .form input,
+  .form select {
     width: 100%;
     padding: 8px;
     border: 1px solid #ccc;
@@ -33,22 +33,20 @@
     margin-top: 4px;
   }
   
-  .add-expense-form button {
+  .form button {
     margin-top: 10px;
-    padding: 8px 16px;
+    width: 70px; 
+    height: 40px; 
     background-color: #007bff;
+    margin-left: 50px; 
     color: #fff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
   }
   
-  .add-expense-form button:hover {
+  .form button:hover {
     background-color: #0056b3;
-  }
-
-  .add-expense-form button + button {
-    margin-left: 10px; /* Add space between buttons */
   }
 
   .error{

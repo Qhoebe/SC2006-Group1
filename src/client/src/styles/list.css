@@ -1,7 +1,6 @@
 /* ExpensesList.css */
 .list {
     position: relative;
-    max-height: 700px; /* Adjust for desired height */
     overflow-y: auto; /* Enables vertical scrolling */
     scrollbar-width: none;
   }

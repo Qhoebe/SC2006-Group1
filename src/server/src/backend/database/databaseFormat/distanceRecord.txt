@@ -1,4 +1,4 @@
-// COLLECTION NAME : "DistanceRecord"
+// COLLECTION NAME : "Distance"
 
 {
     username: _username, //String 

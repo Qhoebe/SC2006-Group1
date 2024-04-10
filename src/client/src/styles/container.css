@@ -1,9 +1,10 @@
 
 .container {
     position: relative;
-    width: 380px;
-    height: 800px;
-    min-height: 630px;
+    width: 100%;
+    min-width: 250px;
+    max-width: 450px; 
+    height: 600px;
     background-color: #1d1f21; /* Adjust background color as per design */
     border-radius: 10px; /* Adjust border radius as per design */
     padding: 10px; /* Adjust padding as per design */
@@ -17,7 +18,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    color: rgb(222, 196, 196);
+    color: rgb(196, 189, 189);
     font-weight: bold; 
     font-size: 35px;  
     padding: 5px;

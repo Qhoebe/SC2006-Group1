@@ -6,6 +6,7 @@ import { getUserDetails } from '../apiCalls/userApi';
 import '../styles/userInfo.css';
 import SpendingGraph from '../components/spendingGraph';
 import { UpdateProvider } from '../context/UpdateContext';
+import MapContainer from '../components/mapContainer'
 
 
 function UserInfoView() {
@@ -42,11 +43,13 @@ function UserInfoView() {
         </div>
         <div className='userContainer-details'>
           <ExpenseContainer username={username} />
-          <DistanceContainer />
+          <DistanceContainer username={username}/>
           <SpendingGraph username = {username} />
         </div>
+        <div className='userContainer-mapInsight'>
+          <MapContainer username = {username} />
+        </div>
       </UpdateProvider>
-
     </div>
   );
   
