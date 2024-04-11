@@ -1,51 +1,41 @@
-import React, { useEffect, useRef, useContext, useState } from "react"; // Added useContext import
+import React, { useContext, useRef, useEffect, useState } from 'react';
 import ScriptLoadContext from '../context/ScriptLoadContext';
 import '../styles/searchBar.css'
 
 const SearchBar = ({ onPlaceSelect, className }) => {
-
+  const { googleMaps, isScriptLoaded } = useContext(ScriptLoadContext);
   const [query, setQuery] = useState("");
   const autoCompleteRef = useRef(null);
-  const isScriptLoaded = useContext(ScriptLoadContext); // Use useContext to access the context value
   let autoComplete;
 
   useEffect(() => {
-    
-    if (window.google && isScriptLoaded) { // Check if script is loaded
-      autoComplete = new window.google.maps.places.Autocomplete(
+    if (googleMaps && isScriptLoaded) {
+      autoComplete = new googleMaps.maps.places.Autocomplete(
         autoCompleteRef.current,
         { componentRestrictions: { country: "SG" } }
       );
-
       autoComplete.addListener("place_changed", handlePlaceChanged);
     }
-
-    return () => {
-      if (autoComplete) {
-        window.google.maps.event.clearInstanceListeners(autoComplete);
-      }
-    };
-  }, [isScriptLoaded]);
+    return () => autoComplete && googleMaps.maps.event.clearInstanceListeners(autoComplete);
+  }, [googleMaps, isScriptLoaded]);
 
   const handlePlaceChanged = () => {
     const addressObject = autoComplete.getPlace();
     if (addressObject.geometry) {
-      const name = addressObject.name;
-      const latLng = {
+      setQuery(addressObject.name);
+      onPlaceSelect(addressObject.name, {
         lat: addressObject.geometry.location.lat(),
         lng: addressObject.geometry.location.lng(),
-      };
-      setQuery(name)
-      onPlaceSelect(name, latLng);
+      });
     }
-  }
+  };
 
   return (
     <div>
       <input
         ref={autoCompleteRef}
-        className={`searchBar ${className || ""} `}
-        onChange={(event) => setQuery(event.target.value)}
+        className={`searchBar ${className || ""}`}
+        onChange={(e) => setQuery(e.target.value)}
         placeholder="Search Places ..."
         value={query}
       />

@@ -14,12 +14,13 @@ function DistanceForm({ isOpen, onClose, onSave, distanceRecord }) {
   const [routes, setRoutes] = useState(null)
   const [selectedRouteIndex, setSelectedRouteIndex] = useState(0); // State to track selected route index
   const [saveRequested, setSaveRequested] = useState(false);
-  const isScriptLoaded = useContext(ScriptLoadContext);
+
+  const { isScriptLoaded, googleMaps } = useContext(ScriptLoadContext);
 
 
   useEffect(() => {
-    if (isScriptLoaded && fromLatLng && toLatLng) {
-      calculateRoutes(fromLatLng, toLatLng, (error, routes) => {
+    if (isScriptLoaded && fromLatLng && toLatLng && googleMaps) {
+      calculateRoutes(fromLatLng, toLatLng, googleMaps, (error, routes) => {
         if (error) {
           console.error("Error calculating routes:", error.message);
           setRoutes(null);
@@ -28,7 +29,7 @@ function DistanceForm({ isOpen, onClose, onSave, distanceRecord }) {
         }
       });
     }
-  }, [fromLatLng, toLatLng, isScriptLoaded]);
+  }, [fromLatLng, toLatLng, isScriptLoaded, googleMaps]);
 
   useEffect(() => {
     // Reset selected route index when routes array changes

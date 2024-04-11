@@ -1,15 +1,16 @@
-function calculateRoutes(origin, destination, onRoutesCalculated) {
-  if (!origin || !destination || !window.google) {
+function calculateRoutes(origin, destination, googleMaps, onRoutesCalculated) {
+  if (!origin || !destination || !googleMaps) {
     console.error("Google Maps API is not loaded or parameters are missing");
     return;
   }
 
-  const directionsService = new window.google.maps.DirectionsService();
+  // Use googleMaps passed as a parameter instead of window.google
+  const directionsService = new googleMaps.maps.DirectionsService();
 
   directionsService.route({
     origin: origin,
     destination: destination,
-    travelMode: window.google.maps.TravelMode.DRIVING,
+    travelMode: googleMaps.maps.TravelMode.DRIVING,
     provideRouteAlternatives: true,
   }, (response, status) => {
     if (status === "OK") {
@@ -20,11 +21,9 @@ function calculateRoutes(origin, destination, onRoutesCalculated) {
       onRoutesCalculated(null, routeDetails);  // Pass null for error when successful
     } else {
       console.error("Directions request failed due to", status);
-      // Pass an Error object to the callback
       onRoutesCalculated(new Error(`Directions request failed with status: ${status}`), null);
     }
   });
 }
-
 
 export default calculateRoutes;

@@ -1,38 +1,34 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
-const useLoadScript = (url, setScriptLoaded) => {
+let scriptLoadingStarted = false;
+
+const useLoadScript = (url, setScriptLoaded, setError) => {
   useEffect(() => {
-    const scriptId = 'google-maps-script';
-    let scriptAddedByHook = false; // Flag to track if the script was added by this hook
-
-    // Check if the script is already loaded
-    const existingScript = document.getElementById(scriptId);
-    if (existingScript) {
-      setScriptLoaded(true); // Assume the script is already loaded
-    } else {
-      const script = document.createElement('script');
-      script.id = scriptId;
-      script.src = url;
-      script.async = true;
-      script.onload = () => setScriptLoaded(true); // Set the script as loaded on success
-      script.onerror = () => {
-        console.error(`Failed to load the script at ${url}`);
-        setScriptLoaded(false); // Optionally, handle the load failure
-      };
-      document.head.appendChild(script);
-      scriptAddedByHook = true; // The script was added by this hook
+    if (window.google && window.google.maps) {
+      setScriptLoaded(true);
+      return;
     }
 
-    return () => {
-      // Only remove the script if it was added by this hook
-      if (scriptAddedByHook) {
-        const scriptToRemove = document.getElementById(scriptId);
-        if (scriptToRemove) {
-          document.head.removeChild(scriptToRemove);
-        }
-      }
+    if (scriptLoadingStarted) return;
+    scriptLoadingStarted = true;
+
+    const script = document.createElement('script');
+    script.src = url;
+    script.async = true;
+    script.defer = true;
+    script.onload = () => {
+      setScriptLoaded(true);
+      scriptLoadingStarted = false; // Reset for potential future use
     };
-  }, [url, setScriptLoaded]);
+    script.onerror = (error) => {
+      console.error(`Failed to load the script at ${url}`, error);
+      setScriptLoaded(false);
+      setError(`Failed to load the script at ${url}`);
+      scriptLoadingStarted = false; // Reset for potential future use
+    };
+    document.head.appendChild(script);
+  }, [url, setScriptLoaded, setError]);
 };
 
-export default useLoadScript;
+
+export default useLoadScript

@@ -3,7 +3,7 @@ import ScriptLoadContext from '../context/ScriptLoadContext';
 import '../styles/mapComponent.css';
 
 const Map = ({ className, onMapLoad }) => {  // Include onMapLoad in the component props
-  const isScriptLoaded = useContext(ScriptLoadContext);
+  const { isScriptLoaded } = useContext(ScriptLoadContext);
   const mapContainerRef = useRef(null);
   const isMapInitialized = useRef(false);
 
@@ -89,7 +89,7 @@ const Map = ({ className, onMapLoad }) => {  // Include onMapLoad in the compone
   ]
 
   useEffect(() => {
-    if (isScriptLoaded && !isMapInitialized.current) {
+    if (isScriptLoaded && !isMapInitialized.current && window.google) { // Added window.google check for safety
       const map = new window.google.maps.Map(mapContainerRef.current, {
         center: { lat: 1.350270, lng: 103.832959 },
         zoom: 11.8,
@@ -98,13 +98,14 @@ const Map = ({ className, onMapLoad }) => {  // Include onMapLoad in the compone
         streetViewControl: false,
         styles: darkModeStyles,
       });
-      isMapInitialized.current = true; 
+      isMapInitialized.current = true;
       
       if (onMapLoad) {
         onMapLoad(map);  // Call the onMapLoad callback, passing the map instance
       }
     }
   }, [isScriptLoaded, onMapLoad]);  // Include onMapLoad in the dependency array
+  
 
   return (
     <div>

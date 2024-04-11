@@ -1,6 +1,12 @@
-// ScriptLoadContext.js
-import React from 'react';
+import { createContext} from 'react';
 
-const ScriptLoadContext = React.createContext(false);
+// Initial state now includes placeholders for Google Maps services
+const initialState = {
+  isScriptLoaded: false,
+  googleMaps: null, // This will hold the google maps object
+  error: null,
+};
+
+const ScriptLoadContext = createContext(initialState);
 
 export default ScriptLoadContext;

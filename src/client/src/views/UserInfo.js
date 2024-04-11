@@ -2,17 +2,16 @@ import React, { useState, useEffect } from 'react';
 import UserOverview from '../components/userOverview';
 import ExpenseContainer from '../components/expenseContainer';
 import DistanceContainer from '../components/distanceContainer';
-import { getUserDetails } from '../apiCalls/userApi';
-import '../styles/userInfo.css';
 import SpendingGraph from '../components/spendingGraph';
+import MapContainer from '../components/mapContainer';
+import { getUserDetails } from '../apiCalls/userApi';
 import { UpdateProvider } from '../context/UpdateContext';
-import MapContainer from '../components/mapContainer'
+import { ScriptLoadProvider } from '../context/ScriptLoadProvided'; // Adjusted import path
 
+import '../styles/userInfo.css';
 
 function UserInfoView() {
-
   const username = 'bob';
-
   const [carModel, setCarModel] = useState('');
   const [fuelConsumption, setFuelConsumption] = useState('');
 
@@ -28,31 +27,31 @@ function UserInfoView() {
         setCarModel('-');
         setFuelConsumption('-');
       });
+  }, [username]);
 
-  }, [username]); // Dependency array ensures that useEffect runs whenever username changes
-    
   return (
-    <div className="userContainer">
-      <div className='userContainer-row1'>
-        <h1 className="userInfo-carName">{carModel}</h1>
-        <div className="userInfo-carFuelConsumption">CAR FUEL CONSUMPTION: {fuelConsumption}L/100KM</div>
+    <ScriptLoadProvider scriptUrl={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY_2}&libraries=places`}>
+      <div className="userContainer">
+        <div className='userContainer-row1'>
+          <h1 className="userInfo-carName">{carModel}</h1>
+          <div className="userInfo-carFuelConsumption">CAR FUEL CONSUMPTION: {fuelConsumption}L/100KM</div>
+        </div>
+        <UpdateProvider>
+          <div className='userContainer-overview'>
+            <UserOverview username={username}/>
+          </div>
+          <div className='userContainer-details'>
+            <ExpenseContainer username={username} />
+            <DistanceContainer username={username}/>
+            <SpendingGraph username={username} />
+          </div>
+          <div className='userContainer-mapInsight'>
+            <MapContainer username={username} />
+          </div>
+        </UpdateProvider>
       </div>
-      <UpdateProvider> {/* Wrap components that need access to expenses context */}
-        <div className='userContainer-overview'>
-          <UserOverview username={username}/>
-        </div>
-        <div className='userContainer-details'>
-          <ExpenseContainer username={username} />
-          <DistanceContainer username={username}/>
-          <SpendingGraph username = {username} />
-        </div>
-        <div className='userContainer-mapInsight'>
-          <MapContainer username = {username} />
-        </div>
-      </UpdateProvider>
-    </div>
+    </ScriptLoadProvider>
   );
-  
 }
 
 export default UserInfoView;

@@ -1,7 +1,8 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useContext } from 'react';
 import Map from '../utils/mapComponent';
 import SearchBar from '../utils/searchBar';
 import { addMarker, calculateAndDisplayRoute } from '../utils/mapUtils';
+import ScriptLoadContext from '../context/ScriptLoadContext';
 import '../styles/mapContainer.css'
 
 // Petrol stations data
@@ -27,14 +28,19 @@ const MapContainer = ({username}) => {
   const [numberOfDays, setNumberOfDays] = useState(1);
   const [estimatedPrice, setEstimatedPrice] = useState(0);
 
+  const { isScriptLoaded, googleMaps } = useContext(ScriptLoadContext);
+
   const handleMapLoad = useCallback((map) => {
+
+    if (!googleMaps || !isScriptLoaded) return; // Ensure the script is loaded and googleMaps object is available
+
     mapRef.current = map; // Store the map instance in mapRef
-    const localDirectionsService = new window.google.maps.DirectionsService();
-    const localDirectionsRenderer = new window.google.maps.DirectionsRenderer();
+    const localDirectionsService = new googleMaps.maps.DirectionsService();
+    const localDirectionsRenderer = new googleMaps.maps.DirectionsRenderer();
     localDirectionsRenderer.setMap(map);
     setDirectionsService(localDirectionsService);
     setDirectionsRenderer(localDirectionsRenderer);
-  }, []);
+  }, [googleMaps, isScriptLoaded]);
 
   // Handle change in petrol station selection
   const handleStationChange = (e) => {
@@ -50,17 +56,17 @@ const MapContainer = ({username}) => {
   // Get the fuel types for the selected station
   const fuelTypes = selectedStation ? petrol.find(station => station.name === selectedStation).fuel : {};
 
-  const handlePlaceSelect = () => {
-    if (!mapRef.current || !directionsService || !directionsRenderer || !selectedLocation) return;
+  const handlePlaceSelect = useCallback(() => {
+    if (!isScriptLoaded || !googleMaps || !mapRef.current || !directionsService || !directionsRenderer || !selectedLocation) return;
 
-    const newMarker = addMarker(selectedLocation.latLng, mapRef.current);
-    setMarkers((prevMarkers) => [...prevMarkers, newMarker]);
-    setLocationNames((prevNames) => [...prevNames, selectedLocation.name]);
+    const newMarker = addMarker(selectedLocation.latLng, mapRef.current, googleMaps);
+    setMarkers(prevMarkers => [...prevMarkers, newMarker]);
+    setLocationNames(prevNames => [...prevNames, selectedLocation.name]);
 
     if (markers.length >= 1) {
-      calculateAndDisplayRoute(directionsService, directionsRenderer, [...markers, newMarker], setTotalDistance);
+      calculateAndDisplayRoute(directionsService, directionsRenderer, [...markers, newMarker], googleMaps, setTotalDistance);
     }
-  };
+  }, [isScriptLoaded, googleMaps, markers, selectedLocation, directionsService, directionsRenderer]);
 
   const handleNumberOfDaysChange = (e) => {
     // Use Math.floor() to ensure the value is always an integer
@@ -112,26 +118,22 @@ const MapContainer = ({username}) => {
   };
 
 
-  const handleReset = () => {
-
-    markers.forEach(marker => {
-      marker.setMap(null);
-    });
-
+  const handleReset = useCallback(() => {
+    markers.forEach(marker => marker.setMap(null));
     setMarkers([]);
     setLocationNames([]);
     setSelectedStation('');
     setSelectedFuelType('');
-    setIsRoundTrip(true); 
+    setIsRoundTrip(true);
     setNumberOfDays(1);
     setTotalDistance(0);
     setEstimatedPrice(0);
-    setSelectedLocation(null)
+    setSelectedLocation(null);
 
     if (directionsRenderer) {
-      directionsRenderer.setDirections({ routes: [] }); // Clear routes from the map
+      directionsRenderer.setDirections({ routes: [] });
     }
-  };
+  }, [markers, directionsRenderer]);
   
   return (
     <div className='mapContainer'>
