@@ -23,7 +23,11 @@ const ScriptLoadProvider = ({ children, scriptUrl }) => {
         error: null,
       });
     } else if (!isScriptLoaded && error) {
-      setGoogleMapsApi(prevState => ({ ...prevState, error }));
+      setGoogleMapsApi({
+        isScriptLoaded: false,
+        googleMaps: null,
+        error: error,
+      });
     }
   }, [isScriptLoaded, error]);
 

@@ -1,29 +1,42 @@
 import React, { useContext, useRef, useEffect, useState } from 'react';
 import ScriptLoadContext from '../context/ScriptLoadContext';
-import '../styles/searchBar.css'
+import '../styles/searchBar.css';
 
 const SearchBar = ({ onPlaceSelect, className }) => {
   const { googleMaps, isScriptLoaded } = useContext(ScriptLoadContext);
   const [query, setQuery] = useState("");
   const autoCompleteRef = useRef(null);
-  let autoComplete;
+  const autoCompleteInstance = useRef(null);
 
   useEffect(() => {
-    if (googleMaps && isScriptLoaded) {
-      autoComplete = new googleMaps.maps.places.Autocomplete(
-        autoCompleteRef.current,
-        { componentRestrictions: { country: "SG" } }
-      );
-      autoComplete.addListener("place_changed", handlePlaceChanged);
+    if (isScriptLoaded && !autoCompleteInstance.current) {
+      const initAutocomplete = () => {
+        if (window.google && window.google.maps && window.google.maps.places) {
+          try {
+            autoCompleteInstance.current = new window.google.maps.places.Autocomplete(
+              autoCompleteRef.current,
+              { componentRestrictions: { country: "SG" } }
+            );
+            autoCompleteInstance.current.addListener("place_changed", handlePlaceChanged);
+          } catch (error) {
+            console.error("Autocomplete initialization failed:", error);
+          }
+        } else {
+          setTimeout(initAutocomplete, 2000); // Retry after 500ms
+        }
+      };
+  
+      initAutocomplete();
     }
-    return () => autoComplete && googleMaps.maps.event.clearInstanceListeners(autoComplete);
-  }, [googleMaps, isScriptLoaded]);
+  }, [googleMaps, isScriptLoaded, autoCompleteInstance]); // Ensure dependencies are correctly listed
 
   const handlePlaceChanged = () => {
-    const addressObject = autoComplete.getPlace();
-    if (addressObject.geometry) {
-      setQuery(addressObject.name);
-      onPlaceSelect(addressObject.name, {
+    if (!autoCompleteInstance.current) return;
+    const addressObject = autoCompleteInstance.current.getPlace();
+    if (addressObject && addressObject.geometry) {
+      const name = addressObject.formatted_address || addressObject.name;
+      setQuery(name);
+      onPlaceSelect(name, {
         lat: addressObject.geometry.location.lat(),
         lng: addressObject.geometry.location.lng(),
       });
