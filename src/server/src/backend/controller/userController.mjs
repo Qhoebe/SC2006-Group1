@@ -107,6 +107,7 @@ export async function editUserInfo(document) {
  */
 export async function signup(newDocument) {
   try {
+
     const { documentCount } = await import("../database/database.mjs");
 
     const isUserNameUnique = await documentCount(UserInformation, {
@@ -115,7 +116,6 @@ export async function signup(newDocument) {
     if (isUserNameUnique > 0) return 0;
 
    await editUserInfo(newDocument);
-
     return 1;
   } catch (e) {
     throw new Error("Error at signup:\n", e);

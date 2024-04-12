@@ -6,7 +6,7 @@ import SpendingGraph from '../components/spendingGraph';
 import MapContainer from '../components/mapContainer';
 import { getUserDetails } from '../apiCalls/userApi';
 import { UpdateProvider } from '../context/UpdateContext';
-import { ScriptLoadProvider } from '../context/ScriptLoadProvided'; // Adjusted import path
+
 
 import '../styles/userInfo.css';
 
@@ -30,7 +30,6 @@ function UserInfoView() {
   }, [username]);
 
   return (
-    <ScriptLoadProvider scriptUrl={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY_2}&libraries=places`}>
       <div className="userContainer">
         <div className='userContainer-row1'>
           <h1 className="userInfo-carName">{carModel}</h1>
@@ -50,7 +49,6 @@ function UserInfoView() {
           </div>
         </UpdateProvider>
       </div>
-    </ScriptLoadProvider>
   );
 }
 

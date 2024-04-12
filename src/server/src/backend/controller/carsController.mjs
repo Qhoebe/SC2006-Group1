@@ -1,3 +1,4 @@
+import { JSDOM } from "jsdom";
 /** To get the list of model for a specific car make
  *
  * @param {*} makeID the ID of the car make
@@ -56,25 +57,29 @@ export async function getCarFuelConsumption(makeID, modelID) {
  */
 export async function getNameOfModel(makeID, modelID) {
   try {
+    console.log(`Retrieving model data for makeID: ${makeID}, modelID: ${modelID}`);
     const importPath = `../database/car/models/${makeID}.js`;
-
+    
+    // Attempt to dynamically import the car model data
     const module = await import(importPath);
     const htmlListOfModels = module.default;
 
-    // Parse the HTML string
-    const { JSDOM } = await import("jsdom");
+    // Dynamically import JSDOM only if needed
     const dom = new JSDOM(htmlListOfModels);
     const htmlDoc = dom.window.document;
 
     // Find the option with a specific value
-    const document = htmlDoc.querySelector(`option[value="${modelID}"]`);
+    const optionElement = htmlDoc.querySelector(`option[value="${modelID}"]`);
 
-    if (!document) {
+    if (!optionElement) {
+      console.error("Car model not found for the provided modelID:", modelID);
       throw new Error("Car Model Name not found");
     }
 
-    return document.textContent;
+    return optionElement.textContent;
   } catch (e) {
-    throw new Error("Error at getNameOfModel:\n", e);
+    console.error("Error at getNameOfModel:", e);
+    // Consider logging this error to a central logging service if this is a production environment
+    throw new Error(`Error retrieving car model name: ${e.message}`);
   }
 }
