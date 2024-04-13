@@ -10,11 +10,14 @@ function SignupView() {
 
   //request server for list of model for selected brand
   useEffect(() => {
-    if(selectedCarBrand==="") setCarModels([]);
+    if(selectedCarBrand==="") {
+      setCarModels([]); 
+      return;
+    }
     console.log(selectedCarBrand);
+ 
     const fetchData = async () => {
       const response = await fetchPut('/user/signup', { carMakeID: selectedCarBrand });
-
       if (response && response.listofModels){
         
       await setCarModels(parseCarOptions(response.listofModels) );
