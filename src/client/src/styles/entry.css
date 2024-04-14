@@ -1,0 +1,50 @@
+/* ExpenseEntry.css */
+.entry {
+  position: relative; /* Ensure the parent container is positioned */
+  width: 100%;
+  height: 100px;
+  background-color: #FFFFFF;
+  margin: 8px 0;
+  padding: 10px;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.entry-row1{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.entry-date {
+  font-size: 1.3rem; /* Adjust the font size */
+  align-self: right;
+}
+
+.entry-title{
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+
+.entry-details{
+  font-size: 1.1rem; 
+  white-space: nowrap;
+}
+
+.entry-actions {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.delete-btn, .edit-btn {
+  cursor: pointer;
+  margin-left: 5px;
+  margin-top: 5px; /* Adjust the amount of padding */
+}
+
+
+  

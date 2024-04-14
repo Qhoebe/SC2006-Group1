@@ -1,0 +1,7 @@
+/* ExpensesList.css */
+.list {
+    position: relative;
+    overflow-y: auto; /* Enables vertical scrolling */
+    scrollbar-width: none;
+  }
+  

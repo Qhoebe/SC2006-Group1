@@ -1,7 +1,0 @@
-// COLLECTION NAME : "DistanceRecord"
-
-{
-    username: _username, //String 
-    distanceTravelled: _distanceTravelled, //Float
-    date: _date //Date, date object in js
-}

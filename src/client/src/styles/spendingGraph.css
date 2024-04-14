@@ -1,0 +1,19 @@
+.graph {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    min-width: 500px; 
+    background-color: #1d1f21; /* Adjust background color as per design */
+    border-radius: 10px; /* Adjust border radius as per design */
+    padding: 10px; /* Adjust padding as per design */
+    margin: 16px;
+    border: 5px solid #4b4e50; 
+    color: #fff;
+    display: flex; 
+  }
+
+  .graph-container {
+    width: 100%; /* Use 100% for full-width or specify another width */
+    height: 85%; /* Height will adjust to maintain aspect ratio */
+    align-self: center;
+  }

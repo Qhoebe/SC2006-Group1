@@ -1,0 +1,58 @@
+.userContainer {
+  height: auto;
+  display: flex; /* Establish flex container */
+  flex-direction: column; /* Stack children vertically */
+  align-items: left; /* Center children horizontally */
+  background-color: #191919;
+  margin: 0 auto;
+  padding-right: 7%;
+  padding-left: 7%;
+}
+
+.userContainer-row1{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-width: 1230px;
+}
+
+.userInfo-carName{
+  font-size: 8rem; /* 50px / 16px base font size */
+  font-weight: bold;
+  color: #ffffff;
+  align-self:flex-end;
+}
+
+.userInfo-carFuelConsumption {
+  font-size: 2rem; /* 30px / 16px base font size */
+  font-weight: bold;
+  color: #ffffff;
+  justify-content: right;
+  align-self: flex-end;
+  flex-shrink: 0;
+}
+
+.userContainer-overview {
+  display: flex;
+  flex-direction: row; /* Arrange children horizontally */
+  width: 100%; /* Take full width of the parent */
+  justify-content: center; /* Space out children evenly */
+  align-items: flex-end; /* Align children to the start of the cross axis */
+}
+
+.userContainer-details {
+  display: flex;
+  flex-direction: row; /* Arrange children horizontally */
+  width: 100%; /* Take full width of the parent */
+  min-width: 1300px;
+  justify-content: left;
+  align-items: center;
+}
+
+.userContainer-mapInsight{
+  flex : 1;
+  width: 100%;
+  min-width: 1300px;
+  display: flex;
+  justify-content: center;
+}

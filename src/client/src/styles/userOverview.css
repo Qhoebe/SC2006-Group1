@@ -1,0 +1,85 @@
+/* userOverview.css */
+.rounded-rectangle {
+  display: flex; /* Establish flex container */
+  flex-direction: column; /* Stack children vertically */
+  align-items: left; /* Center children horizontally */
+  width: 100%;  
+  min-width: 1300px;
+  height: 230px;
+  background-color: #1d1f21;
+  border-radius: 10px;
+  color: #fff;
+  border: 5px solid #4b4e50; 
+  padding: 10px; 
+  left: 380px;
+}
+
+.overview-row1{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.date-style {
+  font-size: 22px; 
+  font-weight: bold;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.date-style input {
+  background-color: #1d1f21;
+  border: none; 
+  border-color: #cecdcd; 
+  border-width: 1px;
+  border-style: solid; 
+  font-size: 22px;
+  font-weight: bold;
+  color: #ffffff; 
+  width: 170px; 
+  flex-shrink: 0;
+  
+}
+
+.overview-header{
+    color: rgb(196, 189, 189);
+    font-weight: bold; 
+    font-size: 35px; 
+}
+
+.error-message {
+  display: flex;
+  height: 0px;
+  flex-direction: row;
+  justify-content: right;
+  align-items: baseline;
+  color: red;
+  font-size: 18px;
+}
+
+.overview-filler{
+  flex-grow: 1;
+  flex-shrink: 5;
+  color: #1d1f21;
+}
+
+/* Define styles for the table */
+table {
+  width: 100%; 
+  margin: 20px auto 0; 
+}
+
+
+/* Define styles for table headers */
+th {
+    color: #a8a4a4;
+    font-size: 23px; 
+    text-decoration: underline;
+  }
+  
+  /* Define styles for table cells */
+  td {
+    font-weight: bold; 
+    font-size: 3rem; 
+    text-align: center; 
+  }
