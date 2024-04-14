@@ -210,6 +210,7 @@ export default function MapContainer() {
                 setOrigin(latLng); // Update the map's center
                 setZoom(15); // Zoom in more closely, you can set this value as needed
               }}
+              className ="searchBar override"
             />
           </div>
           <div className="overlayContainer">

@@ -19,6 +19,12 @@ const UserOverview = ({ username }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const { updateFlag } = useUpdate();
 
+  const ukDate = new Date(); 
+  const today = new Date(ukDate.setHours(ukDate.getHours()+8)).toISOString().split('T')[0];
+
+  // Define the minimum date 
+  const minDate = "2020-01-01";
+
   useEffect(() => {
     const fetchInsights = async () => {
       try {
@@ -68,9 +74,9 @@ const UserOverview = ({ username }) => {
         <div className='overview-header'>OVERVIEW</div>
         <div className="date-style">
           <label htmlFor="startDate">from </label>
-          <input type="date" id="startDate" value={startDate.toISOString().split('T')[0]} onChange={handleStartDateChange} />
+          <input type="date" id="startDate" value={startDate.toISOString().split('T')[0]} onChange={handleStartDateChange} min={minDate} />
           <label htmlFor="endDate"> to </label>
-          <input type="date" id="endDate" value={endDate.toISOString().split('T')[0]} onChange={handleEndDateChange} />
+          <input type="date" id="endDate" value={endDate.toISOString().split('T')[0]} onChange={handleEndDateChange} max={today}/>
         </div>
       </div>
       <div className="error-message">

@@ -40,7 +40,7 @@ export async function getExpensesList(
     const { findDocuments } = await import("../database/database.mjs");
 
     _category = _category !== undefined ? _category : 3;
-    startDate = startDate !== undefined ? startDate : new Date(2024, 0, 19);
+    startDate = startDate !== undefined ? startDate : new Date(2020, 0, 0);
     endDate = endDate !== undefined ? endDate : new Date();
     descending = descending !== undefined ? descending : -1;
     max = max !== undefined ? max : Number.MAX_SAFE_INTEGER;

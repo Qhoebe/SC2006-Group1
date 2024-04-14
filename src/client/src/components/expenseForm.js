@@ -11,6 +11,12 @@ const ExpenseForm = ({ isOpen, onClose, onSave, expense }) => {
   const [costError, setCostError] = useState('');
   const [amountOfFuelPumpError, setAmountOfFuelPumpError] = useState('');
 
+  const ukDate = new Date(); 
+  const today = new Date(ukDate.setHours(ukDate.getHours()+8)).toISOString().split('T')[0];
+
+  // Define the minimum date 
+  const minDate = "2020-01-01";
+
   // Update form fields when expense prop changes
   useEffect(() => {
     if (expense && Object.keys(expense).length > 0) {
@@ -68,7 +74,7 @@ const ExpenseForm = ({ isOpen, onClose, onSave, expense }) => {
 
   const handleCostChange = (e) => {
     const value = e.target.value;
-    if (!isNaN(value) && Number(value) >= 0) {
+    if (!isNaN(value) && Number(value) > 0) {
       setCost(value);
       if (Number(value) > 10000000) {
         setCostError('Amount spend cannot exceed $10 million.');
@@ -76,17 +82,25 @@ const ExpenseForm = ({ isOpen, onClose, onSave, expense }) => {
         setCostError('');
       }
     }
+    else if (!isNaN(value) && Number(value) === 0){
+      setCost(value);
+      setCostError('Amount should be more than $0');
+    }
   };
 
   const handleAmountOfFuelChange = (e) => {
     const value = e.target.value;
-    if (!isNaN(value) && Number(value) >= 0) {
+    if (!isNaN(value) && Number(value) > 0) {
       setAmountOfFuelPump(value);
       if (Number(value) > 100000) {
         setAmountOfFuelPumpError('Amount of Fuel Pump cannot exceed 100,000L.');
       } else {
         setAmountOfFuelPumpError('');
       }
+    }
+    else if (!isNaN(value) && Number(value) === 0){
+      setCost(value);
+      setAmountOfFuelPumpError('Fuel Pump should be more than 0L');
     }
   };
 
@@ -111,7 +125,13 @@ const ExpenseForm = ({ isOpen, onClose, onSave, expense }) => {
           </label>
           <label>
             Date:
-            <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+            <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            min={minDate}
+            max={today}
+            />
           </label>
           {category === '0' && (
             <label>

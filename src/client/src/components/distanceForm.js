@@ -17,6 +17,12 @@ function DistanceForm({ isOpen, onClose, onSave, distanceRecord }) {
 
   const { isScriptLoaded, googleMaps } = useContext(ScriptLoadContext);
 
+  const ukDate = new Date(); 
+  const today = new Date(ukDate.setHours(ukDate.getHours()+8)).toISOString().split('T')[0];
+
+  // Define the minimum date 
+  const minDate = "2020-01-01";
+
 
   useEffect(() => {
     if (isScriptLoaded && fromLatLng && toLatLng && googleMaps) {
@@ -100,7 +106,13 @@ function DistanceForm({ isOpen, onClose, onSave, distanceRecord }) {
     <div className="form">
       <label>
         Date:
-        <input type="date" value={date} onChange={handleDateChange} />
+        <input
+          type="date"
+          value={date}
+          onChange={handleDateChange}
+          min={minDate}
+          max={today}
+        />
       </label>
       <label>
         From:

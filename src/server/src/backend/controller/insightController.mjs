@@ -117,8 +117,21 @@ export async function sumExpensesForDateRange(_username, startDate, endDate) {
       ];
   
       const result = await aggregateDocuments(Expenses, pipeline)
-      
+
+      const expectedIds = [0, 2];
+
+      // Check if all expected _id values are present
+      const resultsById = result.reduce((acc, item) => {
+          acc[item._id] = item;
+          return acc;
+      }, {});
+    
       if (result.length > 0) {
+        expectedIds.forEach(id => {
+          if (!resultsById.hasOwnProperty(id)) {
+              result.push({ _id: id, totalSpend: 0 });
+          }
+      });
         return result; // Return the total spend for each category
       } else {
         return [{_id: 0, totalSpend:0},{_id: 1, totalSpend:0},{_id: 2, totalSpend:0}]; // Return 0 if no documents match the date range
@@ -219,14 +232,16 @@ export async function getExpenseForPastYear(_username) {
   const expense = expensesArray.reverse()
   
   const data = [{
-    type: "spline",
+    type: "line",
     name: "Total Expenses",
     showInLegend: true,
+    yValueFormatString: "$0",
     dataPoints: total
   }, {
-    type: "spline",
+    type: "line",
     name: "Petrol Expenses",
     showInLegend: true,
+    yValueFormatString: "$0",
     dataPoints: expense
   }];
   
