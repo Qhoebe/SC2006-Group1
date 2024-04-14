@@ -4,6 +4,7 @@ import { useEffect,useState } from 'react'
 function SignupView() {
   const [selectedCarBrand, setSelectedCarBrand] = useState('');
   const[selectedCarModel, setSelectedCarModel] = useState('');
+  const [statusMessage, setStatusMessage] = useState('');
 
   //get carModels from server depending on selectedCarBrand
   const [carModels, setCarModels] = useState('');
@@ -54,7 +55,15 @@ console.log(submitData)
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(submitData), // Convert the object to JSON string
-        }).then((response) => response.json()).then((data) => console.log(data));
+        }).then((response) => response.json()).then((data) =>{ 
+         
+          setStatusMessage(data.message);
+
+          if(data.message==="Sign up successful")
+          {
+            window.location.href="/login";
+          }
+        });
 
         if (!response.ok) {
             throw new Error('Failed to submit form');
@@ -111,7 +120,9 @@ console.log(submitData)
 
             </form>
 
-       
+       <div className="p-5">
+        <h1 className="text-red-500">{statusMessage}</h1>
+       </div>
 
         
       </div>

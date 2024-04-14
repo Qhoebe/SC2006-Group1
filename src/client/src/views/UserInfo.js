@@ -39,7 +39,8 @@ if(username===null)
    
       <div className="userContainer">
         <div className='userContainer-row1'>
-          <h1 className="userInfo-carName">Car Model {carModel}</h1>
+          <h1 className="p-5 text-5xl font-bold text-white ">Car Model :</h1>
+          <h1 className="userInfo-carName"> {carModel}</h1>
           <div className="userInfo-carFuelConsumption">CAR FUEL CONSUMPTION: {fuelConsumption}L/100KM</div>
         </div>
         <UpdateProvider>
@@ -49,7 +50,7 @@ if(username===null)
           <div className='userContainer-details'>
             <ExpenseContainer username={username} />
             <DistanceContainer username={username}/>
-            {/* <SpendingGraph username={username} /> */}
+            <SpendingGraph username={username} />
           </div>
           <div className='userContainer-mapInsight'>
             <MapContainer username={username} />

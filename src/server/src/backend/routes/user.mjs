@@ -36,11 +36,11 @@ router.post("/signup", async (req, res) => {
     const { signup } = await import("../controller/userController.mjs");
     const success = await signup(req.body);
 
-    if (success) res.status(201).send("Sign up successful");
-    else res.send({message: "Username is already taken. Please choose another username"})//.status(406).send("Username is already taken. Please choose another username");
+    if (success) res.status(201).json({message:"Sign up successful"});
+    else res.json({message: "Username is already taken. Please choose another username"})//.status(406).send("Username is already taken. Please choose another username");
   } catch (e) {
     console.error("An error occurred:\n", e);
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({message:"Internal Server Error"});
   }
 });
 
