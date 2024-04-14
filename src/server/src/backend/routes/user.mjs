@@ -23,11 +23,11 @@ router.post("/login", async (req, res) => {
     const { login } = await import("../controller/userController.mjs");
     const success = await login(req.body.username, req.body.password);
 
-    if (success === 1) res.status(201).send("Login successful");
-    else res.status(406).send(success);
+    if (success === 1) res.status(201).json({message:"success", token: req.body.username});
+    else res.status(406).json({message:success});
   } catch (e) {
     console.error("An error occurred:\n", e);
-    res.status(500).send("Internal Server Error");
+    res.status(500).json({message:"Internal Server Error"});
   }
 });
 

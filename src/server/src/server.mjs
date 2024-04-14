@@ -5,7 +5,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 //const PORT = process.env.PORT | 3000;
-const PORT = 5000;
+const PORT = 3001;
 
 import userRoute from "./backend/routes/user.mjs";
 import expensesRoute from "./backend/routes/expenses.mjs";

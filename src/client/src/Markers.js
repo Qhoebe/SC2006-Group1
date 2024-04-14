@@ -74,11 +74,18 @@ function Markers(props) {
     };
 
     // Call the function inside the useEffect callback
-    fetchIsFavouritedStatus();
+    if (window.sessionStorage.getItem("username")) {
+      fetchIsFavouritedStatus(window.sessionStorage.getItem("username"));
+    }
   }, [selectedPlace]);
 
   const toggleFavourite = async () => {
     if (!selectedPlace) return;
+    if (window.sessionStorage.getItem("username") === null) {
+      window.alert("Please login to use bookmark feature");
+      return;
+    }
+    const user = window.sessionStorage.getItem("username");
 
     try {
       var placeID;
@@ -95,7 +102,7 @@ function Markers(props) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userID: "bob", // REPLACE!!!!
+          userID: user, // REPLACE!!!!
           placeID: placeID,
         }),
       });
@@ -162,7 +169,7 @@ function Markers(props) {
             <button onClick={toggleFavourite}>
               <FontAwesomeIcon
                 icon={faBookmark}
-                color={isFavourited ? "red" : "lightgray"}
+                color={isFavourited ? "#FFC000" : "lightgray"}
                 size="lg"
               />
             </button>
@@ -248,10 +255,12 @@ function InfoWindowContent({ selectedPlace }) {
         {selectedPlace.CarParkID && (
           <h1>Available Lots: {selectedPlace.AvailableLots}</h1>
         )}
-        <h1>
-          Ratings:({selectedPlace.Rating})
-          <StarRating rating={selectedPlace.Rating} color={"#FFC000"} />
-        </h1>
+        {selectedPlace.Rating && (
+          <h1>
+            Ratings:({selectedPlace.Rating})
+            <StarRating rating={selectedPlace.Rating} color={"#FFC000"} />
+          </h1>
+        )}
       </div>
     </div>
   );

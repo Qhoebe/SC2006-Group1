@@ -62,7 +62,9 @@ export default function MapContainer() {
       setFacilityData([]);
       return;
     }
-    console.log(origin);
+    //console.log(origin);
+
+    const user = window.sessionStorage.getItem("username");
 
     const controller = new AbortController();
     if (selectedFacility.toUpperCase() === "CARPARK") {
@@ -71,7 +73,7 @@ export default function MapContainer() {
       fetch("carpark/" + origin.lat + "/" + origin.lng + "/" + radius / 1000)
         .then((response) => response.json())
         .then((data) => {
-          if (favourites) {
+          if (favourites && user) {
             fetch(`/favourites/findAll`, {
               method: "POST",
               headers: {
@@ -79,7 +81,7 @@ export default function MapContainer() {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                userID: "bob", //REPLACE!!!
+                userID: user, //REPLACE!!!
               }),
             })
               .then((response) => {
@@ -115,7 +117,7 @@ export default function MapContainer() {
       fetch("facilities/?" + searchParams.toString())
         .then((response) => response.json())
         .then((data) => {
-          if (favourites) {
+          if (favourites && user) {
             fetch(`/favourites/findAll`, {
               method: "POST",
               headers: {
@@ -123,7 +125,7 @@ export default function MapContainer() {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                userID: "bob", //REPLACE!!!
+                userID: user, //REPLACE!!!
               }),
             })
               .then((response) => {
@@ -162,7 +164,6 @@ export default function MapContainer() {
     const longitude = position.coords.longitude;
 
     setOrigin({ lat: latitude, lng: longitude });
-    setcurrPos({ lat: latitude, lng: longitude });
   };
   function error() {
     console.log("Unable to retrieve your location");
