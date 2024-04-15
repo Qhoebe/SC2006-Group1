@@ -38,7 +38,6 @@ const SpendingGraph = (props) => {
 		axisY: {
 			includeZero: true,
 			minimum: 0, // Make sure this is set so zero values are within the visible range.
-			viewportMinimum: -0.01,
 			title: "Spent",
 			titleFontColor: "#FFFFFF",
 			titleFontSize: 30,

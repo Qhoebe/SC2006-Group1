@@ -186,7 +186,8 @@ export default function MapContainer() {
     <div
       style={{ position: "fixed", bottom: 0, height: "93vh", width: "100vw" }}
     >
-      <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
+      <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+       libraries={['places']}>
         <Map
           defaultZoom={zoom}
           defaultCenter={origin}

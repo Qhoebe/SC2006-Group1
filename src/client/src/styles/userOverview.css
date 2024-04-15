@@ -38,11 +38,14 @@
   color: #ffffff; 
   width: 170px; 
   flex-shrink: 0;
-  
+}
+
+.date-style input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
 }
 
 .overview-header{
-    color: rgb(196, 189, 189);
+    color: rgb(220, 220, 220);
     font-weight: bold; 
     font-size: 35px; 
 }
@@ -83,3 +86,4 @@ th {
     font-size: 3rem; 
     text-align: center; 
   }
+

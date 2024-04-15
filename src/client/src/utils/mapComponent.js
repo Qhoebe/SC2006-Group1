@@ -3,6 +3,7 @@ import ScriptLoadContext from '../context/ScriptLoadContext';
 import '../styles/mapComponent.css';
 
 const Map = ({ className, onMapLoad }) => {  // Include onMapLoad in the component props
+  
   const { isScriptLoaded } = useContext(ScriptLoadContext);
   const mapContainerRef = useRef(null);
   const isMapInitialized = useRef(false);
@@ -119,7 +120,3 @@ const Map = ({ className, onMapLoad }) => {  // Include onMapLoad in the compone
 };
 
 export default Map;
-
-
-
-

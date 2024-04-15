@@ -34,7 +34,7 @@ const SearchBar = ({ onPlaceSelect, className }) => {
     if (!autoCompleteInstance.current) return;
     const addressObject = autoCompleteInstance.current.getPlace();
     if (addressObject && addressObject.geometry) {
-      const name = addressObject.formatted_address || addressObject.name;
+      const name = addressObject.name || addressObject.formatted_address ;
       setQuery(name);
       onPlaceSelect(name, {
         lat: addressObject.geometry.location.lat(),
