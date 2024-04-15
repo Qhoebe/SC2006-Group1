@@ -41,7 +41,7 @@ function Markers(props) {
   };
 
   useEffect(() => {
-    const fetchIsFavouritedStatus = async () => {
+    const fetchIsFavouritedStatus = async (user) => {
       if (!selectedPlace) return;
       try {
         var placeID;
@@ -58,7 +58,7 @@ function Markers(props) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            userID: "bob", //REPLACE!!!
+            userID: user, //REPLACE!!!
             placeID: placeID, // Assuming your backend needs the placeID to check if it's favourited
           }),
         });

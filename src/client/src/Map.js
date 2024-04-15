@@ -210,7 +210,7 @@ export default function MapContainer() {
                 setOrigin(latLng); // Update the map's center
                 setZoom(15); // Zoom in more closely, you can set this value as needed
               }}
-              className ="searchBar override"
+              className="searchBar override"
             />
           </div>
           <div className="overlayContainer">
@@ -253,11 +253,17 @@ export default function MapContainer() {
               </button>
               <button
                 className="overlayButton"
-                onClick={() => setFavourites(!favourites)}
+                onClick={() => {
+                  if (window.sessionStorage.getItem("username") === null) {
+                    window.alert("Please login to use bookmark feature");
+                  } else {
+                    setFavourites(!favourites);
+                  }
+                }}
               >
                 <FontAwesomeIcon
                   icon={faBookmark}
-                  color={favourites ? "red" : "black"}
+                  color={favourites ? "#FFC000" : "black"}
                   size="lg"
                 />
               </button>
