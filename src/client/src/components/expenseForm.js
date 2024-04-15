@@ -39,6 +39,14 @@ const ExpenseForm = ({ isOpen, onClose, onSave, expense }) => {
     setAmountOfFuelPumpError('');
 
     // Validation checks
+    if (parseInt(cost) === 0) {
+      setCostError('Amount should be more than $0');
+      return;
+    }
+    if (category === '0' && parseInt(amountOfFuelPump) === 0) {
+      setAmountOfFuelPumpError('Fuel Pump should be more than 0L');
+      return;
+    } 
     if (parseInt(cost) > 10000000) {
       setCostError('Cost cannot exceed 10 million.');
       return;
@@ -74,7 +82,7 @@ const ExpenseForm = ({ isOpen, onClose, onSave, expense }) => {
 
   const handleCostChange = (e) => {
     const value = e.target.value;
-    if (!isNaN(value) && Number(value) > 0) {
+    if (!isNaN(value) && Number(value) >= 0) {
       setCost(value);
       if (Number(value) > 10000000) {
         setCostError('Amount spend cannot exceed $10 million.');
@@ -82,25 +90,17 @@ const ExpenseForm = ({ isOpen, onClose, onSave, expense }) => {
         setCostError('');
       }
     }
-    else if (!isNaN(value) && Number(value) === 0){
-      setCost(value);
-      setCostError('Amount should be more than $0');
-    }
   };
 
   const handleAmountOfFuelChange = (e) => {
     const value = e.target.value;
-    if (!isNaN(value) && Number(value) > 0) {
+    if (!isNaN(value) && Number(value) >= 0) {
       setAmountOfFuelPump(value);
       if (Number(value) > 100000) {
         setAmountOfFuelPumpError('Amount of Fuel Pump cannot exceed 100,000L.');
       } else {
         setAmountOfFuelPumpError('');
       }
-    }
-    else if (!isNaN(value) && Number(value) === 0){
-      setCost(value);
-      setAmountOfFuelPumpError('Fuel Pump should be more than 0L');
     }
   };
 
