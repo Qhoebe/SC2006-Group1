@@ -33,6 +33,7 @@ fetchData();
   
   const onCarBrandChange = (event) => {
     setSelectedCarBrand(event.target.value);
+    setSelectedCarModel("");
   };
   const onCarModelChange = (event) => {
     setSelectedCarModel(event.target.value);
@@ -45,8 +46,15 @@ fetchData();
 
     const formData = new FormData(event.target); // Get the form data
     const submitData = Object.fromEntries(formData); // Convert FormData to object
+    if(selectedCarBrand==="" || selectedCarModel==="") {
+      setStatusMessage("Please select a car brand and model");
+      return;
+    }
+
     submitData.carMakeID=selectedCarBrand;
     submitData.carModelID=selectedCarModel;
+
+
 console.log(submitData)
     try {
         const response = await fetch('user/signup', {
