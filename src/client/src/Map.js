@@ -1,42 +1,33 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { Circle } from "./components/circle";
-import { facilityLocator, test } from "./utils/googlePlaces";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 import Markers from "./Markers";
 import {
   APIProvider,
   Map,
-  AdvancedMarker,
-  useAdvancedMarkerRef,
-  Pin,
-  InfoWindow,
   useMap,
   useMapsLibrary,
-  GoogleMapsContext,
 } from "@vis.gl/react-google-maps";
 
 import RouteButton from "./routeButton";
 import SearchBar from "./utils/searchBar";
 
 export default function MapContainer() {
-  const placesLibrary = useMapsLibrary("places");
-  const mapRef = useRef();
+  //const placesLibrary = useMapsLibrary("places");
+  // const mapRef = useRef();
 
-  const [currPos, setcurrPos] = useState({ lat: 1.3477, lng: 103.6837 });
   //setting zoom level
   const [zoom, setZoom] = useState(12); // Default zoom level
 
-  //NTU coordinates
-  const [position, setPosition] = useState({ lat: 1.3477, lng: 103.6837 });
 
   //Parameter related
   const [radius, setRadius] = useState(1000);
   const [selectedFacility, setSelectedFacility] = useState("CARPARK");
 
   //get data from server and store here
-  const [carparkData, setCarparkData] = useState([]);
+  // const [carparkData, setCarparkData] = useState([]);
   const [facilityData, setFacilityData] = useState([]);
 
   // favourites
@@ -178,7 +169,7 @@ export default function MapContainer() {
             lng: position.coords.longitude,
           };
           setOrigin(pos); // Set map center to current location
-          setcurrPos(pos); // Set marker at the current position
+          
         },
         () => {
           // Handle location error
@@ -276,7 +267,7 @@ export default function MapContainer() {
                   navigator.geolocation.getCurrentPosition(getLocation, error);
                 }}
               >
-                GPS
+                Your Location
               </button>
 
               <button
@@ -309,29 +300,9 @@ export default function MapContainer() {
             onClick={handleButtonClick}
             resetRadius={resetRadius}
           ></Markers>
-          {/* <div>
-        {carparkData.map((point) => (
-
-        <AdvancedMarker position={point.Location}
-        title={point.Development}
-        key={point.CarParkID}
-        onClick={() => selectCarpark(point.CarParkID)}
-        >
-            <Pin  ></Pin>
-            {(point.CarParkID===selectedCarParkID)&&(
-          <InfoWindow position={point.Location} onCloseClick={closeInfoWindow}>
-           <h3>{point.Development}</h3>
-           <p>Available Lots: {point.AvailableLots}</p>
-           <button onClick={() => console.log("PRESSED")}>Close</button>
-          </InfoWindow>
-        )}
-        </AdvancedMarker>
-        ))}
         
-
-        </div> */}
           <Direction
-            origin={currPos}
+            origin={origin}
             destination={destination}
             setDestination={setDestination}
           />
@@ -360,6 +331,7 @@ function Direction({ origin, destination, setDestination }) {
 
   useEffect(() => {
     if (!directionsService || !directionsRenderer) return;
+
     map.panTo(origin);
     if (origin && destination) {
       directionsService
