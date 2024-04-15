@@ -57,20 +57,6 @@ function UserInfoView() {
           </div>
         </UpdateProvider>
       </div>
-
-      <UpdateProvider>
-        <div className="userContainer-overview">
-          <UserOverview username={username} />
-        </div>
-        <div className="userContainer-details">
-          <ExpenseContainer username={username} />
-          <DistanceContainer username={username} />
-          <SpendingGraph username={username} />
-        </div>
-        <div className="userContainer-mapInsight">
-          <MapContainer username={username} />
-        </div>
-      </UpdateProvider>
     </div>
   );
 }
