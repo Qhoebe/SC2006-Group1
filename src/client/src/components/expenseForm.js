@@ -131,6 +131,7 @@ const ExpenseForm = ({ isOpen, onClose, onSave, expense }) => {
             onChange={(e) => setDate(e.target.value)}
             min={minDate}
             max={today}
+            onKeyDown={(e) => e.preventDefault()}
             />
           </label>
           {category === '0' && (

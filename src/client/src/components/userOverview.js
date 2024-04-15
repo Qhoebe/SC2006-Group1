@@ -74,9 +74,9 @@ const UserOverview = ({ username }) => {
         <div className='overview-header'>OVERVIEW</div>
         <div className="date-style">
           <label htmlFor="startDate">from </label>
-          <input type="date" id="startDate" value={startDate.toISOString().split('T')[0]} onChange={handleStartDateChange} min={minDate} />
+          <input type="date" id="startDate" value={startDate.toISOString().split('T')[0]} onChange={handleStartDateChange} min={minDate} max={today} onKeyDown={(e) => e.preventDefault()} />
           <label htmlFor="endDate"> to </label>
-          <input type="date" id="endDate" value={endDate.toISOString().split('T')[0]} onChange={handleEndDateChange} max={today}/>
+          <input type="date" id="endDate" value={endDate.toISOString().split('T')[0]} onChange={handleEndDateChange} min={startDate} max={today} onKeyDown={(e) => e.preventDefault()} />
         </div>
       </div>
       <div className="error-message">

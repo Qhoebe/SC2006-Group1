@@ -118,7 +118,7 @@ export async function sumExpensesForDateRange(_username, startDate, endDate) {
   
       const result = await aggregateDocuments(Expenses, pipeline)
 
-      const expectedIds = [0, 2];
+      const expectedIds = [0, 1, 2];
 
       // Check if all expected _id values are present
       const resultsById = result.reduce((acc, item) => {
@@ -131,7 +131,7 @@ export async function sumExpensesForDateRange(_username, startDate, endDate) {
           if (!resultsById.hasOwnProperty(id)) {
               result.push({ _id: id, totalSpend: 0 });
           }
-      });
+        });
         return result; // Return the total spend for each category
       } else {
         return [{_id: 0, totalSpend:0},{_id: 1, totalSpend:0},{_id: 2, totalSpend:0}]; // Return 0 if no documents match the date range
@@ -229,20 +229,22 @@ export async function getExpenseForPastYear(_username) {
   const expensesArray = results.flatMap(result => result.expensesForMonth);
 
   const total = totalArray.reverse(); 
-  const expense = expensesArray.reverse()
+  const expense = expensesArray.reverse();
   
-  const data = [{
-    type: "line",
-    name: "Total Expenses",
-    showInLegend: true,
-    yValueFormatString: "$0",
-    dataPoints: total
-  }, {
-    type: "line",
-    name: "Petrol Expenses",
-    showInLegend: true,
-    yValueFormatString: "$0",
-    dataPoints: expense
+  const data = [
+    {
+      type: "line",
+      name: "Total Expenses",
+      showInLegend: true,
+      yValueFormatString: "$0",
+      dataPoints: total
+    }, 
+    {
+      type: "line",
+      name: "Petrol Expenses",
+      showInLegend: true,
+      yValueFormatString: "$0",
+      dataPoints: expense
   }];
   
   return data;

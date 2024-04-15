@@ -112,6 +112,7 @@ function DistanceForm({ isOpen, onClose, onSave, distanceRecord }) {
           onChange={handleDateChange}
           min={minDate}
           max={today}
+          onKeyDown={(e) => e.preventDefault()}
         />
       </label>
       <label>
