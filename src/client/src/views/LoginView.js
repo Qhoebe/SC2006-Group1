@@ -36,48 +36,52 @@ function LoginView() {
   }
 
   return (
-    <div className="p-2 flex flex-col justify-center items-center">
-      <form
-        onSubmit={handleLogin}
-        className="grid grid-cols-2 gap-4 items-center"
-      >
-        <h1 className="col-span-2 text-2xl font-bold">Login</h1>
-
-        <label className="col-span-1">
-          UserID:
-          <input
-            type="text"
-            name="username"
-            placeholder="Enter your username"
-            className="w-full"
-          />
-        </label>
-        <label className="col-span-1">
-          Password:
-          <input
-            type="password"
-            name="password"
-            placeholder="Enter your password"
-            className="w-full"
-          />
-        </label>
-        <button
-          type="submit"
-          className="col-span-2 p-2 hover:bg-gray-300 rounded-lg"
+    <div>
+      <div className="p-2 flex flex-col justify-center items-center">
+        <h1 className="col-span-2 text-2xl font-bold py-10 ">Login</h1>
+        <form
+          onSubmit={handleLogin}
+          className="grid grid-cols-2 gap-4 items-center"
         >
-          Login
-        </button>
-      </form>
+          <label className="col-span-1">
+            UserID:
+            <input
+              type="text"
+              name="username"
+              placeholder="Enter your username"
+              className="w-full"
+            />
+          </label>
+          <label className="col-span-1">
+            Password:
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              className="w-full"
+            />
+          </label>
+          <button
+            type="submit"
+            className="col-span-2 p-2 hover:bg-gray-300 rounded-lg"
+          >
+            Login
+          </button>
+        </form>
 
-      <Link to="/signup">
-        <button className="p-2 hover:bg-gray-300 rounded-lg">Sign up</button>
-      </Link>
+        <Link to="/signup">
+          <button className="p-2 px-40 hover:bg-gray-300 rounded-lg">
+            Sign up
+          </button>
+        </Link>
 
-      {loginStatusMessage && (
-        <div>
-          <h1 className="text-red-500">{loginStatusMessage}</h1>
-        </div>
-      )}
+        {loginStatusMessage && (
+          <div>
+            <h1 className="text-red-500">{loginStatusMessage}</h1>
+          </div>
+        )}
+      </div>
+      )
     </div>
   );
 }
