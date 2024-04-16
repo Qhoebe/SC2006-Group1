@@ -21,7 +21,6 @@ export default function MapContainer() {
   //setting zoom level
   const [zoom, setZoom] = useState(12); // Default zoom level
 
-
   //Parameter related
   const [radius, setRadius] = useState(1000);
   const [selectedFacility, setSelectedFacility] = useState("CARPARK");
@@ -169,7 +168,6 @@ export default function MapContainer() {
             lng: position.coords.longitude,
           };
           setOrigin(pos); // Set map center to current location
-          
         },
         () => {
           // Handle location error
@@ -186,8 +184,10 @@ export default function MapContainer() {
     <div
       style={{ position: "fixed", bottom: 0, height: "93vh", width: "100vw" }}
     >
-      <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
-       libraries={['places']}>
+      <APIProvider
+        apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+        libraries={["places"]}
+      >
         <Map
           defaultZoom={zoom}
           defaultCenter={origin}
@@ -270,13 +270,6 @@ export default function MapContainer() {
               >
                 Your Location
               </button>
-
-              <button
-                className="overlayButton"
-                onClick={() => setOrigin({ lat: 1.3691, lng: 103.8454 })}
-              >
-                AMK{" "}
-              </button>
             </div>
           </div>
 
@@ -301,7 +294,7 @@ export default function MapContainer() {
             onClick={handleButtonClick}
             resetRadius={resetRadius}
           ></Markers>
-        
+
           <Direction
             origin={origin}
             destination={destination}
