@@ -99,7 +99,7 @@ const UserOverview = ({ username }) => {
             <td>${repairSpent}</td>
             <td>${fuelSpent}</td>
             <td>{fuelPump}L</td>
-            <td>{distance}</td>
+            <td>{distance.toFixed(2)}</td>
           </tr>
         </tbody>
       </table>
