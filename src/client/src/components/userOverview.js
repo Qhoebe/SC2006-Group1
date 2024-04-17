@@ -95,11 +95,11 @@ const UserOverview = ({ username }) => {
         </thead>
         <tbody>
           <tr>
-            <td>${parseFloat(accessoriesSpent.toFixed(2))}</td>
-            <td>${parseFloat(repairSpent.toFixed(2))}</td>
-            <td>${parseFloat(fuelSpent.toFixed(2))}</td>
-            <td>{parseFloat(fuelPump.toFixed(2))}L</td>
-            <td>{parseFloat(distance.toFixed(2))}</td>
+            <td>${parseFloat(accessoriesSpent).toFixed(2)}</td>
+            <td>${parseFloat(repairSpent).toFixed(2)}</td>
+            <td>${parseFloat(fuelSpent).toFixed(2)}</td>
+            <td>{parseFloat(fuelPump).toFixed(2)}L</td>
+            <td>{parseFloat(distance).toFixed(2)}</td>
           </tr>
         </tbody>
       </table>

@@ -1,5 +1,6 @@
 .userContainer {
   height: auto;
+  width: fill; 
   display: flex; /* Establish flex container */
   flex-direction: column; /* Stack children vertically */
   align-items: left; /* Center children horizontally */
