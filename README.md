@@ -7,17 +7,15 @@ Project mission statement
 
 To run our project: 
 
-1) clone our repository at a chosen file directory.
+1) Clone our repository at a chosen file directory.
 2) Ensure that your system has node.js and added to the system PATH (to download node.js https://nodejs.org/en/download)
+3) Open terminal in the file directory where the git repository is cloned.
+4) Our project uses a Client-Server architecture. This means that our client and server runs on two different port.
+5) Our chosen port number for client is 3000 while server is 3001. Ensure that both port is not being used.
+6) Open two terminal and run the following code in each terminal:
 
-Start an indented code block following a paragraph with a blank line and at least four spaces of indentation:
+    cd .\src\client\
+    cd .\src\server\src\
 
-    This is a code block.
 
-    Blank lines between indented lines do not end the code block.
 
-    Here is some HTML:
-        <div class="footer">
-             2009—2017 JetBrains · All rights reserved
-        </div>
-This line of text is not indented. It ends the code block and starts a new paragraph.
