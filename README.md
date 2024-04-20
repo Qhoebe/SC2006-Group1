@@ -13,9 +13,12 @@ To run our project:
 4) Our project uses a Client-Server architecture. This means that our client and server runs on two different port.
 5) Our chosen port number for client is 3000 while server is 3001. Ensure that both port is not being used.
 
-Open two terminal and run the following code in each terminal:
+Open two terminal
+In the first terminal, run the following command:
 
     cd .\src\client\
+
+In the second terminal, run the following command:
 
     cd .\src\server\src\
 
