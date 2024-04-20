@@ -36,7 +36,13 @@ router.post("/signup", async (req, res) => {
     const { signup } = await import("../controller/userController.mjs");
     const success = await signup(req.body);
 
-    if (success) res.status(201).json({message:"Sign up successful"});
+    if (success === 1) res.status(201).json({message:"Sign up successful"});
+    else if (success === -1) res.json({message: `Password is weak. Please choose a strong password. 
+        A strong password include:
+        8 or more character,
+        Uppercase Letter,
+        Lowercase Letter,
+        Special character`})
     else res.json({message: "Username is already taken. Please choose another username"})//.status(406).send("Username is already taken. Please choose another username");
   } catch (e) {
     console.error("An error occurred:\n", e);

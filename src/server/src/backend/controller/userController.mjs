@@ -3,6 +3,31 @@ const UserInformation = "UserInformation";
 // have a method to check the strength of the password
 // have a method to ensure that a username does not contain any XSS
 
+
+function isStrongPassword(password) {
+  // Check if the password length is more than 7
+  if (password.length <= 7) {
+      return false;
+  }
+  // Check for at least one uppercase letter
+  if (!/[A-Z]/.test(password)) {
+      return false;
+  }
+  // Check for at least one lowercase letter
+  if (!/[a-z]/.test(password)) {
+      return false;
+  }
+  // Check for at least one digit
+  if (!/[0-9]/.test(password)) {
+      return false;
+  }
+  // Check for at least one special character
+  if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+      return false;
+  }
+  return true;
+}
+
 /** To get the user particulars
  *
  * @param {*} _username the username of the user
@@ -114,6 +139,8 @@ export async function signup(newDocument) {
       username: newDocument.username,
     });
     if (isUserNameUnique > 0) return 0;
+
+    if (!isStrongPassword(newDocument.password)) return -1; 
 
    await editUserInfo(newDocument);
     return 1;
