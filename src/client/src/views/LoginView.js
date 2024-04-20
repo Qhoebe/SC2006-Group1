@@ -81,7 +81,6 @@ function LoginView() {
           </div>
         )}
       </div>
-      )
     </div>
   );
 }
