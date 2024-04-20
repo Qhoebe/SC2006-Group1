@@ -25,7 +25,7 @@ After which, run the following command to install the require node_modules (if n
 
     npm install
 
-Run the following command on the terminal in the server/src file 
+Run the following command on the terminal in the server/src directory 
 
     npm run start
 
@@ -34,7 +34,7 @@ In the console, you should see the following message if the server is running wi
     Server running 
     Database connected. 
 
-After connecting to the server, run the following commond on the terminal in the client file
+After connecting to the server, run the following commond on the terminal in the client directory
 
     npm run start
 
