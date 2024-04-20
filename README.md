@@ -12,10 +12,28 @@ To run our project:
 3) Open terminal in the file directory where the git repository is cloned.
 4) Our project uses a Client-Server architecture. This means that our client and server runs on two different port.
 5) Our chosen port number for client is 3000 while server is 3001. Ensure that both port is not being used.
-6) Open two terminal and run the following code in each terminal:
+
+Open two terminal and run the following code in each terminal:
 
     cd .\src\client\
+
     cd .\src\server\src\
 
+After which, run the following command to install the require node_modules (if not installed): 
 
+    npm install
 
+Run the following command on the terminal in the server/src file 
+
+    npm run start
+
+In the console, you should see the following message if the server is running without error
+
+    Server running 
+    Database connected. 
+
+After connecting to the server, run the following commond on the terminal in the client file
+
+    npm run start
+
+This should automatically open a browser and you are free to use our application!
