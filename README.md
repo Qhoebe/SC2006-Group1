@@ -21,7 +21,7 @@ In the second terminal, run the following command:
 
     cd .\src\server\src\
 
-After which, run the following command to install the require node_modules (if not installed): 
+To install the require node_modules (if not installed), run the following command on both terminals: 
 
     npm install
 
